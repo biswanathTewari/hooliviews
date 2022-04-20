@@ -47,6 +47,6 @@
     "prop-types": "^15.8.1"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix"
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   }
 }
