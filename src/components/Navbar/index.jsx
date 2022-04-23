@@ -53,7 +53,7 @@ const Navbar = ({ hasSearch }) => {
   return (
     <nav className="navbar--transparent navbar">
       <svg
-        className="e-logo"
+        className="elogo"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 598.63 202.32"
         onClick={handleLogoClick}
@@ -66,7 +66,7 @@ const Navbar = ({ hasSearch }) => {
       </svg>
       {hasSearch && (
         <form
-          className="searchbar-wrapper"
+          className="navbar__searchwrapper"
           onSubmit={e => {
             e.preventDefault()
             handleSearch()
@@ -74,12 +74,15 @@ const Navbar = ({ hasSearch }) => {
         >
           <input
             type="text"
-            className="searchbar"
+            className="navbar__searchbar"
             placeholder="Search"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
-          <i className="fas fa-search search-icon" onClick={handleSearch}></i>
+          <i
+            className="fas fa-search navvbar__searchicon"
+            onClick={handleSearch}
+          ></i>
         </form>
       )}
       <ul

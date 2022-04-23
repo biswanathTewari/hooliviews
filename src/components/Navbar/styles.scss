@@ -3,13 +3,13 @@
 .navbar--transparent {
   background-color: transparent !important;
 
-  .e-logo {
+  .elogo {
     max-width: 7rem;
     max-height: 7rem;
     cursor: pointer;
   }
 
-  .e-logo-small {
+  .elogo--small {
     max-width: 5rem;
     max-height: 5rem;
   }
@@ -30,14 +30,14 @@
 
   /* ---searchbar--- */
 
-  .searchbar-wrapper {
+  .navbar__searchwrapper {
     width: 40%;
     flex-shrink: 1;
     display: flex;
     align-items: center;
     position: relative;
 
-    .searchbar {
+    .navbar__searchbar {
       width: 100%;
       padding: 0.4rem 0.5rem;
       padding-right: 2.5rem;
@@ -48,7 +48,7 @@
       font-size: 1rem;
     }
 
-    .search-icon {
+    .navbar__searchicon {
       position: absolute;
       right: 1rem;
       font-size: 1rem;
