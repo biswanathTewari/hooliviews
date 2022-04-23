@@ -1,7 +1,12 @@
 @import '../../sass/index.scss';
 
-.navbar--transparent {
-  background-color: transparent !important;
+.navbar {
+  position: sticky !important;
+  top: 0;
+  right: 0;
+  left: 0;
+  transition: background-color 0.3s ease-in-out;
+  z-index: var(--zindex-2);
 
   .elogo {
     max-width: 7rem;
@@ -15,9 +20,9 @@
   }
 
   .nav-links {
-    background-color: $backgroundColor;
     width: 20%;
     gap: 1rem;
+    transition: background-color 0.3s ease-in-out;
 
     @include respond(phone) {
       width: 100%;
@@ -53,5 +58,19 @@
       right: 1rem;
       font-size: 1rem;
     }
+  }
+}
+
+.navbar--transparent {
+  background-color: transparent !important;
+  .nav-links {
+    background-color: $backgroundColor;
+  }
+}
+
+.navbar--secondary {
+  background-color: $secondaryColor !important;
+  .nav-links {
+    background-color: $secondaryColor;
   }
 }
