@@ -1,0 +1,63 @@
+@import '../../sass/index.scss';
+
+.mobilenav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  box-shadow: 0.5rem -0.5rem 5rem 0.25rem rgba(231, 222, 222, 0.15);
+  z-index: var(--zindex-2);
+
+  @include respond(phone) {
+    display: block;
+  }
+
+  &__navlinks {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+
+    .mobilenav__navlink {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .mobilenav__navicon {
+        height: 2rem;
+        width: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.75rem;
+        margin-bottom: 0.5rem;
+        background-color: $inactiveBackgroundColor;
+        transition: background-color 0.3s ease-in-out;
+        i {
+          color: $inactiveColor;
+          font-size: 1rem;
+        }
+
+        &--active {
+          background-color: #ff7551;
+          i {
+            color: white;
+          }
+        }
+      }
+
+      .mobilenav__navtext {
+        font-size: 0.8rem;
+        color: $inactiveColor;
+
+        &--active {
+          color: white;
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+}
