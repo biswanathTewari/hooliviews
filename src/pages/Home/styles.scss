@@ -1,9 +1,13 @@
 @import '../../sass/index.scss';
 
 .home {
+  overflow: hidden;
   &__content {
     min-height: 90vh;
     padding-bottom: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     @include respond(phone) {
       min-height: 90vh;
@@ -86,7 +90,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 2rem;
-    margin-top: 2.5rem;
+    margin: 2.5rem 0;
 
     @include respond(tab-land) {
       justify-content: center;
