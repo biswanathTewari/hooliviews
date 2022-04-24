@@ -1,0 +1,92 @@
+@import '../../sass/index.scss';
+
+.sidebar {
+  min-height: 90vh;
+  width: 9.25rem;
+  position: sticky;
+  top: 10vh;
+  left: 0;
+  padding: 1rem;
+
+  @include respond(phone) {
+    display: none;
+  }
+
+  &__section {
+    .sidebar__title {
+      font-size: 0.75rem;
+      font-weight: bolder;
+      margin-bottom: 1rem;
+      color: $inactiveColor;
+    }
+
+    .sidebar__navs {
+      list-style: none;
+
+      .sidebar__navlink {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        margin-bottom: 1rem;
+        cursor: pointer;
+
+        &:hover {
+          .sidebar__navicon {
+            background-color: white;
+
+            i {
+              color: $inactiveColor;
+            }
+          }
+
+          .sidebar__navtext {
+            color: white;
+          }
+        }
+
+        .sidebar__navicon {
+          height: 2rem;
+          width: 2rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 0.75rem;
+          margin-right: 0.5rem;
+          background-color: $inactiveBackgroundColor;
+          transition: background-color 0.3s ease-in-out;
+          i {
+            color: $inactiveColor;
+          }
+
+          &--active {
+            background-color: #ff7551;
+            i {
+              color: white;
+            }
+          }
+        }
+
+        .sidebar__navtext {
+          font-size: 0.8rem;
+          color: $inactiveColor;
+
+          &--active {
+            color: white;
+            font-weight: bolder;
+          }
+        }
+      }
+    }
+
+    .sidebar__line {
+      margin-top: 2.5rem;
+      width: 100%;
+      height: 1px;
+      background-color: $inactiveColor;
+    }
+  }
+
+  .mt {
+    margin-top: 2.5rem;
+  }
+}
