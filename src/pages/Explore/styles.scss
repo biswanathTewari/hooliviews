@@ -1,6 +1,9 @@
 @import '../../sass/index.scss';
 
 .explore {
+  @include respond(phone) {
+    margin-bottom: 5rem;
+  }
   &__container {
     display: flex;
 
