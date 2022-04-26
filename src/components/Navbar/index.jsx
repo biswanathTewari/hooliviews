@@ -34,6 +34,7 @@ const Navbar = ({ hasSearch }) => {
   const body = document.querySelector('body')
   const html = document.querySelector('html')
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [isOpen, setIsOpen] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
   const [secondaryNav, setSecondaryNav] = React.useState(false)
@@ -111,23 +112,25 @@ const Navbar = ({ hasSearch }) => {
           isOpen && 'navlinks-active'
         }`}
       >
-        <NavLink
-          to={'/'}
-          text="home"
-          toggleNav={toggleNav}
-          isOpen={isOpen}
-          isBtn={false}
-          icon="fa-home"
-        />
-
-        <NavLink
-          to={'/explore'}
-          text="explore"
-          toggleNav={toggleNav}
-          isOpen={isOpen}
-          isBtn={false}
-          icon="fa-film"
-        />
+        {pathname === '/' ? (
+          <NavLink
+            to={'/explore'}
+            text="explore"
+            toggleNav={toggleNav}
+            isOpen={isOpen}
+            isBtn={false}
+            icon="fa-film"
+          />
+        ) : (
+          <NavLink
+            to={'/'}
+            text="home"
+            toggleNav={toggleNav}
+            isOpen={isOpen}
+            isBtn={false}
+            icon="fa-home"
+          />
+        )}
 
         <NavLink
           to={'/login'}
