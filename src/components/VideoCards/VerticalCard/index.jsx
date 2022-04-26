@@ -7,7 +7,7 @@ const VerticalCard = ({
   title,
   //description,
   creator,
-  img,
+  img = 'https://images.pexels.com/photos/7737885/pexels-photo-7737885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
   duration,
   creatorImg,
 }) => {
