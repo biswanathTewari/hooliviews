@@ -1,19 +1,26 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import propTypes from 'prop-types'
 
 import './styles.scss'
 
 const VerticalCard = ({
   title,
-  //description,
   creator,
   img = 'https://images.pexels.com/photos/7737885/pexels-photo-7737885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
   duration,
   creatorImg,
+  id = '3mSMUZ_aC14',
 }) => {
+  const navigate = useNavigate()
   const shortTitle = title.length > 20 ? `${title.substring(0, 20)}...` : title
+
+  const navigationHandler = e => {
+    if (e.target.classList.contains('fas')) return
+    navigate(`/watch/${id}`)
+  }
   return (
-    <div className="VerticalCard">
+    <div className="VerticalCard" onClick={navigationHandler}>
       <div className="VerticalCard__imgwrapper">
         <img
           src={img}
@@ -69,6 +76,8 @@ VerticalCard.propTypes = {
   img: propTypes.string,
   duration: propTypes.string,
   creatorImg: propTypes.string,
+  category: propTypes.string,
+  id: propTypes.string,
 }
 
 export { VerticalCard }
