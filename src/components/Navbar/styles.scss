@@ -2,6 +2,7 @@
 
 .navbar {
   position: sticky !important;
+  padding: $paddingV $paddingH !important;
   top: 0;
   right: 0;
   left: 0;
@@ -40,23 +41,28 @@
     flex-shrink: 1;
     display: flex;
     align-items: center;
-    position: relative;
+    position: absolute;
+    top: 2.75vh;
+    left: 16.45rem;
+    //transform: translateX(-6rem);
 
     .navbar__searchbar {
       width: 100%;
       padding: 0.4rem 0.5rem;
       padding-right: 2.5rem;
-      border: 1px solid white;
+      border: 1px solid $inactiveColor;
       border-radius: 0.75rem;
-      background-color: transparent;
+      background-color: $inactiveBackgroundColor;
       color: var(--text-color);
       font-size: 1rem;
+      outline: none;
     }
 
     .navbar__searchicon {
       position: absolute;
       right: 1rem;
       font-size: 1rem;
+      color: $inactiveColor;
     }
   }
 }
