@@ -1,0 +1,30 @@
+@import '../../sass/index.scss';
+
+.explore {
+  @include respond(phone) {
+    margin-bottom: 5rem;
+  }
+  &__container {
+    display: flex;
+
+    .explore__content {
+      padding: 1rem $paddingH;
+      padding-left: 6.5rem;
+      padding-bottom: 0;
+      height: 100%;
+      width: 100%;
+
+      @include respond(phone) {
+        padding-left: $paddingH;
+      }
+
+      .explore__videos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        grid-gap: 2rem 1.5rem;
+        padding-bottom: 5rem;
+        margin: 1rem 0;
+      }
+    }
+  }
+}

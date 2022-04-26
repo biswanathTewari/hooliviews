@@ -36,6 +36,7 @@ const Navbar = ({ hasSearch }) => {
   const navigate = useNavigate()
   const [isOpen, setIsOpen] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
+  const [secondaryNav, setSecondaryNav] = React.useState(false)
 
   const toggleNav = () => {
     setIsOpen(prev => !prev)
@@ -50,8 +51,28 @@ const Navbar = ({ hasSearch }) => {
     toggleNav()
   }
 
+  const scrollhandler = React.useCallback(() => {
+    if (window.scrollY > 80) {
+      setSecondaryNav(true)
+    } else {
+      setSecondaryNav(false)
+    }
+  }, [])
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', scrollhandler)
+
+    return () => {
+      window.removeEventListener('scroll', scrollhandler)
+    }
+  }, [])
+
   return (
-    <nav className="navbar--transparent navbar">
+    <nav
+      className={`${
+        secondaryNav ? 'navbar--secondary' : 'navbar--transparent'
+      } navbar`}
+    >
       <svg
         className="elogo"
         xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +101,7 @@ const Navbar = ({ hasSearch }) => {
             onChange={e => setSearchTerm(e.target.value)}
           />
           <i
-            className="fas fa-search navvbar__searchicon"
+            className="fas fa-search navbar__searchicon"
             onClick={handleSearch}
           ></i>
         </form>
@@ -100,7 +121,7 @@ const Navbar = ({ hasSearch }) => {
         />
 
         <NavLink
-          to={'/videos'}
+          to={'/explore'}
           text="explore"
           toggleNav={toggleNav}
           isOpen={isOpen}

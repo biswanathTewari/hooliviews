@@ -1,7 +1,13 @@
 @import '../../sass/index.scss';
 
-.navbar--transparent {
-  background-color: transparent !important;
+.navbar {
+  position: sticky !important;
+  padding: $paddingV $paddingH !important;
+  top: 0;
+  right: 0;
+  left: 0;
+  transition: background-color 0.3s ease-in-out;
+  z-index: var(--zindex-2);
 
   .elogo {
     max-width: 7rem;
@@ -15,9 +21,9 @@
   }
 
   .nav-links {
-    background-color: $backgroundColor;
     width: 20%;
     gap: 1rem;
+    transition: background-color 0.3s ease-in-out;
 
     @include respond(phone) {
       width: 100%;
@@ -35,23 +41,42 @@
     flex-shrink: 1;
     display: flex;
     align-items: center;
-    position: relative;
+    position: absolute;
+    top: 2.75vh;
+    left: 16.45rem;
+    //transform: translateX(-6rem);
 
     .navbar__searchbar {
       width: 100%;
       padding: 0.4rem 0.5rem;
       padding-right: 2.5rem;
-      border: 1px solid white;
+      border: 1px solid $inactiveColor;
       border-radius: 0.75rem;
-      background-color: transparent;
+      background-color: $inactiveBackgroundColor;
       color: var(--text-color);
       font-size: 1rem;
+      outline: none;
     }
 
     .navbar__searchicon {
       position: absolute;
       right: 1rem;
       font-size: 1rem;
+      color: $inactiveColor;
     }
+  }
+}
+
+.navbar--transparent {
+  background-color: transparent !important;
+  .nav-links {
+    background-color: $backgroundColor;
+  }
+}
+
+.navbar--secondary {
+  background-color: $secondaryColor !important;
+  .nav-links {
+    background-color: $secondaryColor;
   }
 }
