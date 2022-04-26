@@ -101,7 +101,7 @@ const Navbar = ({ hasSearch }) => {
             onChange={e => setSearchTerm(e.target.value)}
           />
           <i
-            className="fas fa-search navvbar__searchicon"
+            className="fas fa-search navbar__searchicon"
             onClick={handleSearch}
           ></i>
         </form>
