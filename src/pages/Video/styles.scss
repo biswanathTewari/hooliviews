@@ -1,7 +1,6 @@
 @import '../../sass/index.scss';
 
 .video {
-  overflow-x: hidden;
   @include respond(phone) {
     margin-bottom: 5rem;
   }
