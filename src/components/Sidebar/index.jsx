@@ -37,7 +37,7 @@ const Sidebar = () => {
         <h1 className="sidebar__title">MENU</h1>
         <ul className="sidebar__navs">
           <NavLink to="/explore" text="Explore" icon="fa-compass" />
-          <NavLink to="/something" text="something" icon="fa-compass" />
+          <NavLink to="/liked" text="liked" icon="fa-thumbs-up" />
           <NavLink to="/something" text="something" icon="fa-compass" />
           <NavLink to="/something" text="something" icon="fa-compass" />
         </ul>
