@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Mockman from 'mockman-js'
 
 //import AuthRoute from './AuthRoute'
-import { Home, Explore, Video, LikedVideos } from '../pages'
+import { Home, Explore, Video, LikedVideos, WatchLater } from '../pages'
 
 const Navigation = () => {
   return (
@@ -11,6 +11,7 @@ const Navigation = () => {
       <Route path="/" exact element={<Home />} />
       <Route path="/explore" element={<Explore />} />
       <Route path="/liked" element={<LikedVideos />} />
+      <Route path="/watchlater" element={<WatchLater />} />
       <Route path="/watch/:id" element={<Video />} />
 
       <Route path="mockapi" element={<Mockman />} />
