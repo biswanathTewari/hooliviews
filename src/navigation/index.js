@@ -11,6 +11,7 @@ import {
   WatchLater,
   History,
   Login,
+  Signup,
 } from '../pages'
 
 const Navigation = () => {
@@ -23,6 +24,7 @@ const Navigation = () => {
       <Route path="/history" element={<History />} />
       <Route path="/watch/:id" element={<Video />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
 
       <Route path="mockapi" element={<Mockman />} />
     </Routes>
