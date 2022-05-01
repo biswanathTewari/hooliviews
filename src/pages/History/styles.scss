@@ -1,0 +1,68 @@
+@import '../../sass/index.scss';
+
+.history {
+  @include respond(phone) {
+    margin-bottom: 5rem;
+  }
+
+  &__container {
+    display: flex;
+
+    .history__content {
+      padding: $paddingV $paddingH;
+      padding-left: 6.5rem;
+      padding-bottom: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      overflow-x: hidden;
+
+      @include respond(phone) {
+        padding-left: $paddingH;
+      }
+
+      .history__info {
+        margin-right: 20%;
+        .history__imgwrapper {
+          height: 10rem;
+          width: 20rem;
+          background-image: url('../../assets/images/history.jpg');
+          background-size: cover;
+          background-position: center;
+          border-radius: 0.5rem;
+        }
+
+        .h4 {
+          margin: 0.5rem 0;
+        }
+
+        .text-rg {
+          font-weight: bolder;
+          margin-bottom: 1rem;
+          color: $inactiveColor;
+        }
+
+        .btn-transparent {
+          display: inline-block;
+          border-radius: 0.5rem;
+          transition: background-color 0.3s ease-in-out;
+          i {
+            margin-left: 0.25rem;
+          }
+        }
+      }
+
+      .history__list {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        overflow-y: auto;
+        row-gap: 1.25rem;
+        overflow: visible;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}

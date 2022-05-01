@@ -1,1 +1,115 @@
 @import '../../../sass/index.scss';
+
+.HorizontalCard {
+  display: inline-flex;
+  width: 100%;
+  background-color: #252836;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+    .HorizontalCard__info {
+      .flex-wrap {
+        .HorizontalCard__iconswrapper {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &__imgwrapper {
+    width: 10rem;
+    height: 10rem;
+    background-image: url('../../../assets/images/loading.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .HorizontalCard__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    padding: 1rem;
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-grow: 1;
+
+    .text-rg {
+      color: #b7b9d2;
+      font-size: 0.75rem;
+    }
+
+    .HorizontalCard__title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .HorizontalCard__description {
+      font-size: 1rem;
+      color: #b7b9d2;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .flex-wrap {
+      align-items: flex-end;
+      position: relative;
+      .HorizontalCard__views {
+        color: #b7b9d2;
+        font-size: 0.75rem;
+      }
+
+      .HorizontalCard__iconswrapper {
+        display: flex;
+        align-items: flex-end;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        .HorizontalCard__icon {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-left: 0.5rem;
+          i {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+          }
+
+          p {
+            font-size: 0.5rem;
+            color: #b7b9d2;
+          }
+        }
+      }
+    }
+  }
+
+  &__durationWrapper {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    .HorizontalCard__duration {
+      font-size: 0.75rem;
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+@import '../../sass/index.scss';
+
+.likedvideos {
+  @include respond(phone) {
+    margin-bottom: 5rem;
+  }
+
+  &__container {
+    display: flex;
+
+    .likedvideos__content {
+      padding: $paddingV $paddingH;
+      padding-left: 6.5rem;
+      padding-bottom: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      overflow-x: hidden;
+
+      @include respond(phone) {
+        padding-left: $paddingH;
+      }
+
+      .likedvideos__info {
+        margin-right: 20%;
+        .likedvideos__imgwrapper {
+          height: 10rem;
+          width: 20rem;
+          background-image: url('../../assets/images/liked.jpg');
+          background-size: cover;
+          background-position: center;
+          border-radius: 0.5rem;
+        }
+
+        .h4 {
+          margin: 0.5rem 0;
+        }
+
+        .text-rg {
+          font-weight: bolder;
+          margin-bottom: 1rem;
+          color: $inactiveColor;
+        }
+      }
+
+      .likedvideos__list {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        overflow-y: auto;
+        row-gap: 1.25rem;
+        overflow: visible;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
