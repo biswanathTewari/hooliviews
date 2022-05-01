@@ -10,6 +10,7 @@ import {
   LikedVideos,
   WatchLater,
   History,
+  Login,
 } from '../pages'
 
 const Navigation = () => {
@@ -21,6 +22,7 @@ const Navigation = () => {
       <Route path="/watchlater" element={<WatchLater />} />
       <Route path="/history" element={<History />} />
       <Route path="/watch/:id" element={<Video />} />
+      <Route path="/login" element={<Login />} />
 
       <Route path="mockapi" element={<Mockman />} />
     </Routes>

@@ -1,0 +1,59 @@
+@import '../../sass/index.scss';
+
+.login__wrapper {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__card {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  background-color: var(--card-color);
+
+  @include respond(phone) {
+    width: 90%;
+  }
+
+  .h5 {
+    color: black;
+  }
+}
+
+.login__card > form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+#email,
+#password {
+  max-width: none;
+}
+
+.login__conditions {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+}
+
+.form__checkbox {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.sign__up {
+  margin-top: 1rem;
+  cursor: pointer;
+}
