@@ -39,7 +39,7 @@ const Sidebar = () => {
           <NavLink to="/explore" text="explore" icon="fa-compass" />
           <NavLink to="/liked" text="liked" icon="fa-thumbs-up" />
           <NavLink to="/watchlater" text="watch later" icon="fa-clock" />
-          <NavLink to="/something" text="something" icon="fa-compass" />
+          <NavLink to="/history" text="history" icon="fa-history" />
         </ul>
         <div className="sidebar__line"></div>
       </section>
