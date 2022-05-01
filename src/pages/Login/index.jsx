@@ -74,7 +74,7 @@ const Login = () => {
       <main className="login__wrapper">
         <div className="login__card card-shadow">
           <h1 className="h5 text-700">Login</h1>
-          <form action="login__submit">
+          <form action="submit">
             <TextInput
               id="email"
               type="email"
@@ -131,7 +131,7 @@ const Login = () => {
               <h1 className="text-md text-700">Hack</h1>
             </div>
           </form>
-          <div className="sign-up">
+          <div className="login__signup">
             <Link to={'/signup'} className="text-rg">
               Create new account
               <i className="fas fa-angle-right"></i>
