@@ -112,6 +112,14 @@ const Navbar = ({ hasSearch }) => {
           isOpen && 'navlinks-active'
         }`}
       >
+        <NavLink
+          to={'/login'}
+          text="login"
+          toggleNav={toggleNav}
+          isOpen={isOpen}
+          isBtn={true}
+        />
+
         {pathname === '/' ? (
           <NavLink
             to={'/explore'}
@@ -131,14 +139,6 @@ const Navbar = ({ hasSearch }) => {
             icon="fa-home"
           />
         )}
-
-        <NavLink
-          to={'/login'}
-          text="login"
-          toggleNav={toggleNav}
-          isOpen={isOpen}
-          isBtn={true}
-        />
       </ul>
       <div className="burger" onClick={toggleNav}>
         <i className="fas fa-bars"></i>
