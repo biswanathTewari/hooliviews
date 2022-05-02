@@ -23,6 +23,7 @@
   .nav-links {
     width: 20%;
     gap: 1rem;
+    flex-direction: row-reverse;
     transition: background-color 0.3s ease-in-out;
 
     @include respond(tab-port) {
@@ -30,6 +31,7 @@
     }
 
     @include respond(phone) {
+      flex-direction: column-reverse;
       width: 100%;
     }
 
