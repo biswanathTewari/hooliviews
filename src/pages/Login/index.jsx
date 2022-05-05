@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useLocation } from 'react-router-dom'
 
 import { Navbar, Footer, TextInput } from '../../components'
 import { useAuthForm } from '../../hooks'
-//import { actions, useGlobalState, useUser } from '../../store'
-//import { loginService } from '../../services'
-//import { Storage } from '../../utils'
+import { actions, useGlobalState, useUser } from '../../context'
+import { loginService } from '../../services'
+import { Storage } from '../../utils'
 import './styles.scss'
 
 const Login = () => {
@@ -18,30 +18,28 @@ const Login = () => {
     validateForm,
     resetForm,
   } = useAuthForm('', true)
-  //const { showToast } = useGlobalState()
-  //const { isLoggedIn, dispatchUser } = useUser()
-  //   const navigate = useNavigate()
-  //   const location = useLocation()
-  //   const from = location.state ? location.state.from?.pathname : '/'
+  const { showToast } = useGlobalState()
+  const { isLoggedIn, dispatchUser } = useUser()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state ? location.state.from?.pathname : '/'
 
   const loginHandler = async (email, password) => {
     try {
-      //   const response = await loginService(email, password)
-      //   dispatchUser({ type: actions.login, payload: response })
-      //   await Storage.store('userDetails', response)
-      //   showToast({
-      //     message: 'Success!',
-      //     type: 'success',
-      //   })
-      console.log(email, password)
+      const response = await loginService(email, password)
+      dispatchUser({ type: actions.login, payload: response })
+      await Storage.store('userDetails', response)
+      showToast({
+        message: 'Success!',
+        type: 'success',
+      })
       resetForm()
-      //navigate(from, { replace: true })
+      navigate(from, { replace: true })
     } catch (error) {
-      //   showToast({
-      //     message: 'Oops! something went wrong :(',
-      //     type: 'failed',
-      //   })
-      console.log(error)
+      showToast({
+        message: 'Oops! something went wrong :(',
+        type: 'failed',
+      })
     }
   }
 
@@ -50,23 +48,23 @@ const Login = () => {
     if (validateForm()) {
       loginHandler(creds.email, creds.password)
     } else {
-      //   showToast({
-      //     message: 'Bhai kya kar raha hai tu? hack kar',
-      //     type: 'failed',
-      //   })
+      showToast({
+        message: 'Bhai kya kar raha hai tu? hack kar',
+        type: 'failed',
+      })
     }
   }
 
   const htmlHacker = e => {
     e.preventDefault()
     hackHandler()
-    // showToast({
-    //   message: 'Hacked! press Login',
-    //   type: 'success',
-    // })
+    showToast({
+      message: 'Hacked! press Login',
+      type: 'success',
+    })
   }
 
-  //if (isLoggedIn) return <Navigate to={'/'} replace />
+  if (isLoggedIn) return <Navigate to={'/'} replace />
   return (
     <div className="login">
       <Navbar />

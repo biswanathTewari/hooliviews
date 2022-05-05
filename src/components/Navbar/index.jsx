@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
+import { useUser } from '../../context'
 import './styles.scss'
 
 const NavLink = ({ to, text, toggleNav, isOpen, isBtn, icon }) => {
@@ -35,6 +36,7 @@ const Navbar = ({ hasSearch }) => {
   const html = document.querySelector('html')
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const { isLoggedIn } = useUser()
   const [isOpen, setIsOpen] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
   const [secondaryNav, setSecondaryNav] = React.useState(false)
@@ -112,13 +114,24 @@ const Navbar = ({ hasSearch }) => {
           isOpen && 'navlinks-active'
         }`}
       >
-        <NavLink
-          to={'/login'}
-          text="login"
-          toggleNav={toggleNav}
-          isOpen={isOpen}
-          isBtn={true}
-        />
+        {isLoggedIn ? (
+          <NavLink
+            to={'/profile'}
+            text="profile"
+            toggleNav={toggleNav}
+            isOpen={isOpen}
+            isBtn={false}
+            icon="fa-user-alt"
+          />
+        ) : (
+          <NavLink
+            to={'/login'}
+            text="login"
+            toggleNav={toggleNav}
+            isOpen={isOpen}
+            isBtn={true}
+          />
+        )}
 
         {pathname === '/' ? (
           <NavLink

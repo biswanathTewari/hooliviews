@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { actions } from './'
+import { actions, UserProvider } from './'
 
 const GlobalContext = React.createContext()
 
@@ -48,7 +48,7 @@ const GlobalProvider = ({ children }) => {
 
   return (
     <GlobalContext.Provider value={{ globalState, globalDispatch, showToast }}>
-      {children}
+      <UserProvider>{children}</UserProvider>
     </GlobalContext.Provider>
   )
 }
