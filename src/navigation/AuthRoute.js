@@ -1,15 +1,15 @@
-//import React from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-//import { Navigate, useLocation } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
-//import { useUser } from '../store'
+import { useUser } from '../context'
 
 const AuthRoute = ({ children }) => {
-  //const { isLoggedIn } = useUser()
-  //const location = useLocation()
+  const { isLoggedIn } = useUser()
+  const location = useLocation()
 
-  // if (!isLoggedIn)
-  //   return <Navigate to="/login" replace state={{ from: location }} />
+  if (!isLoggedIn)
+    return <Navigate to="/login" replace state={{ from: location }} />
 
   return children
 }
