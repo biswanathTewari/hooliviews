@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 import { Navbar, Footer, TextInput } from '../../components'
 import { useAuthForm } from '../../hooks'
-//import { actions, useGlobalState, useUser } from '../../store'
-//import { signUpService } from '../../services'
+import { actions, useGlobalState, useUser } from '../../context'
+import { signUpService } from '../../services'
 import './styles.scss'
 
 const Signup = () => {
@@ -17,26 +17,26 @@ const Signup = () => {
     validateForm,
     resetForm,
   } = useAuthForm('Please agree to the terms and conditions')
-  //   const { showToast } = useGlobalState()
-  //   const { isLoggedIn, dispatchUser } = useUser()
-  //   const navigate = useNavigate()
+  const { showToast } = useGlobalState()
+  const { isLoggedIn, dispatchUser } = useUser()
+  const navigate = useNavigate()
 
   const signupHandler = async (email, password) => {
     try {
-      //   const response = await signUpService(email, password)
-      //   dispatchUser({ type: actions.login, payload: response })
-      //   showToast({
-      //     message: 'Success!',
-      //     type: 'success',
-      //   })
+      const response = await signUpService(email, password)
+      dispatchUser({ type: actions.login, payload: response })
+      showToast({
+        message: 'Success!',
+        type: 'success',
+      })
       console.log(email, password)
       resetForm()
-      //navigate('/shop', { replace: true })
+      navigate('/explore', { replace: true })
     } catch (error) {
-      //   showToast({
-      //     message: error.message,
-      //     type: 'failed',
-      //   })
+      showToast({
+        message: error.message,
+        type: 'failed',
+      })
     }
   }
 
@@ -45,14 +45,14 @@ const Signup = () => {
     if (validateForm()) {
       signupHandler(creds.email, creds.password)
     } else {
-      //   showToast({
-      //     message: 'Try again!',
-      //     type: 'failed',
-      //   })
+      showToast({
+        message: 'Try again!',
+        type: 'failed',
+      })
     }
   }
 
-  //if (isLoggedIn) return <Navigate to={'/'} replace />
+  if (isLoggedIn) return <Navigate to={'/'} replace />
 
   return (
     <div className="signup">
