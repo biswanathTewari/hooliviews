@@ -29,7 +29,6 @@ const Signup = () => {
         message: 'Success!',
         type: 'success',
       })
-      console.log(email, password)
       resetForm()
       navigate('/explore', { replace: true })
     } catch (error) {
