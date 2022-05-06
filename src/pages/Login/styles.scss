@@ -5,11 +5,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5rem 0;
-
-  @include respond(phone) {
-    margin: 0;
-  }
 
   .login__card {
     width: 50%;
