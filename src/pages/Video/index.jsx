@@ -17,6 +17,7 @@ const Video = () => {
   const { id } = useParams()
   const [isLoading, setIsLoading] = React.useState(true)
   const [video, setVideo] = React.useState({})
+  const scrollRef = React.useRef(null)
   const { myVideos, fetchVideos } = useVideos()
   const { videos, isLoading: suggestionsLoading } = myVideos
 
@@ -27,14 +28,16 @@ const Video = () => {
   }
 
   React.useEffect(() => {
+    setIsLoading(true)
     fetchVideos()
     setTimeout(() => {
       getVideo(id)
     }, 600)
-  }, [])
+    scrollRef.current.scrollIntoView({ behavior: 'smooth' })
+  }, [id])
 
   return (
-    <div className="video">
+    <div className="video" ref={scrollRef}>
       <Navbar />
       <main className="video__wrapper">
         <Sidebar />
