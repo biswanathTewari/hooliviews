@@ -8,11 +8,11 @@ const HorizontalCard = ({
   title,
   description,
   creator,
-  img = 'https://images.pexels.com/photos/7737885/pexels-photo-7737885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+  img,
   duration,
   //creatorImg,
   category,
-  id = '3mSMUZ_aC14',
+  id,
 }) => {
   const navigate = useNavigate()
   const shortTitle = title.length > 20 ? `${title.substring(0, 20)}...` : title
@@ -26,16 +26,20 @@ const HorizontalCard = ({
   return (
     <div className="HorizontalCard" onClick={navigationHandler}>
       <div className="HorizontalCard__imgwrapper">
-        <img
-          src={img}
-          alt="video preview"
-          className="HorizontalCard__img img-responsive"
-        />
+        {img && (
+          <img
+            src={img}
+            alt="video preview"
+            className="HorizontalCard__img img-responsive"
+          />
+        )}
       </div>
 
       <div className="HorizontalCard__info">
-        <h3 className="text-rg">{creator}</h3>
-        <h1 className="HorizontalCard__title">{shortTitle}</h1>
+        <h3 className="text-rg">{creator ? creator : 'loading...'}</h3>
+        <h1 className="HorizontalCard__title">
+          {shortTitle ? shortTitle : 'Loading...'}
+        </h1>
         <h1 className="HorizontalCard__description">{shortDescription}</h1>
         <div className="flex-wrap">
           <p className="HorizontalCard__views">53K views | {category}</p>

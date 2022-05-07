@@ -4,14 +4,7 @@ import propTypes from 'prop-types'
 
 import './styles.scss'
 
-const VerticalCard = ({
-  title,
-  creator,
-  img = 'https://images.pexels.com/photos/7737885/pexels-photo-7737885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-  duration,
-  creatorImg,
-  id = '3mSMUZ_aC14',
-}) => {
+const VerticalCard = ({ title, creator, img, duration, creatorImg, id }) => {
   const navigate = useNavigate()
   const shortTitle = title.length > 20 ? `${title.substring(0, 20)}...` : title
 
@@ -22,16 +15,18 @@ const VerticalCard = ({
   return (
     <div className="VerticalCard" onClick={navigationHandler}>
       <div className="VerticalCard__imgwrapper">
-        <img
-          src={img}
-          alt="video preview"
-          className="VerticalCard__img img-responsive"
-        />
+        {img && (
+          <img
+            src={img}
+            alt="video preview"
+            className="VerticalCard__img img-responsive"
+          />
+        )}
       </div>
 
       <div className="VerticalCard__info">
         <div className="VerticalCard__description">
-          <h3 className="text-rg">{creator}</h3>
+          <h3 className="text-rg">{creator ? creator : 'loading...'}</h3>
           <div className="VerticalCard__creator">
             <div className="VerticalCard__avatarwrapper">
               <img
@@ -42,7 +37,9 @@ const VerticalCard = ({
             </div>
           </div>
         </div>
-        <h1 className="VerticalCard__title">{shortTitle}</h1>
+        <h1 className="VerticalCard__title">
+          {shortTitle ? shortTitle : 'Loading...'}
+        </h1>
         <div className="flex-wrap">
           <p className="VerticalCard__views">53K views</p>
           <div className="VerticalCard__iconswrapper">

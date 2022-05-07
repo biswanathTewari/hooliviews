@@ -7,9 +7,17 @@ import {
   VerticalCard,
   Footer,
 } from '../../components'
+import { useVideos } from '../../context'
 import './styles.scss'
 
 const Explore = () => {
+  const { myVideos, fetchVideos } = useVideos()
+  const { videos, isLoading } = myVideos
+
+  React.useEffect(() => {
+    fetchVideos()
+  }, [])
+
   return (
     <div className="explore">
       <Navbar hasSearch={true} />
@@ -19,51 +27,31 @@ const Explore = () => {
         <article className="explore__content">
           <h1 className="h6">Explore</h1>
           <div className="explore__videos">
-            <VerticalCard
-              creator="bizan"
-              title="Play the life, bizan is the best in the world"
-              duration="7min"
-            />
-            <VerticalCard
-              creator="bizan"
-              title="Play the life, bizan is the best in the world"
-              duration="7min"
-            />
-            <VerticalCard
-              creator="bizan"
-              title="Play the life, bizan is the best in the world"
-              duration="7min"
-            />
-            <VerticalCard
-              creator="bizan"
-              title="Play the life, bizan is the best in the world"
-              duration="7min"
-            />
-            <VerticalCard
-              creator="bizan"
-              title="Play the life, bizan is the best in the world"
-              duration="7min"
-            />
-            <VerticalCard
-              creator="bizan"
-              title="Play the life, bizan is the best in the world"
-              duration="7min"
-            />
-            <VerticalCard
-              creator="bizan"
-              title="Play the life, bizan is the best in the world"
-              duration="7min"
-            />
-            <VerticalCard
-              creator="bizan"
-              title="Play the life, bizan is the best in the world"
-              duration="7min"
-            />
-            <VerticalCard
-              creator="bizan"
-              title="Play the life, bizan is the best in the world"
-              duration="7min"
-            />
+            {isLoading ? (
+              <>
+                {[...new Array(10)].map((_, index) => (
+                  <VerticalCard
+                    key={index}
+                    title="Loading..."
+                    creator="loading..."
+                  />
+                ))}
+              </>
+            ) : (
+              videos.map(video => (
+                <VerticalCard
+                  creator={video.creator}
+                  title={video.title}
+                  duration={video.duration}
+                  img={video.img}
+                  creatorImg={video.creatorImg}
+                  category={video.category}
+                  id={video._id}
+                  description={video.description}
+                  key={video._id}
+                />
+              ))
+            )}
           </div>
         </article>
       </main>
