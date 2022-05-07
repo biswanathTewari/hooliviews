@@ -10,6 +10,7 @@ import {
   Loader,
 } from '../../components'
 import { useVideos } from '../../context'
+import { useDocumentTitle } from '../../hooks'
 import { getVideosByIdService } from '../../services'
 import './styles.scss'
 
@@ -20,12 +21,17 @@ const Video = () => {
   const scrollRef = React.useRef(null)
   const { myVideos, fetchVideos } = useVideos()
   const { videos, isLoading: suggestionsLoading } = myVideos
+  const setDocTitle = useDocumentTitle('Hooli Views')[1]
 
   const getVideo = async id => {
     const res = await getVideosByIdService(id)
     setVideo(res.video)
     setIsLoading(false)
   }
+
+  React.useEffect(() => {
+    if (video.title) setDocTitle(video.title)
+  }, [video])
 
   React.useEffect(() => {
     setIsLoading(true)
@@ -106,26 +112,6 @@ const Video = () => {
                 />
               ))
           )}
-          {/* <VerticalCard
-            creator="bizan"
-            title="Play the life, bizan is the best in the world"
-            duration="7min"
-          />
-          <VerticalCard
-            creator="bizan"
-            title="Play the life, bizan is the best in the world"
-            duration="7min"
-          />
-          <VerticalCard
-            creator="bizan"
-            title="Play the life, bizan is the best in the world"
-            duration="7min"
-          />
-          <VerticalCard
-            creator="bizan"
-            title="Play the life, bizan is the best in the world"
-            duration="7min"
-          /> */}
         </aside>
       </main>
       <Footer />

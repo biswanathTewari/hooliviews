@@ -7,12 +7,14 @@ import {
   VerticalCard,
   Footer,
 } from '../../components'
+import { useDocumentTitle } from '../../hooks'
 import { useVideos } from '../../context'
 import './styles.scss'
 
 const Explore = () => {
   const { myVideos, fetchVideos } = useVideos()
   const { videos, isLoading } = myVideos
+  useDocumentTitle('Explore | Hooli Views')
 
   React.useEffect(() => {
     fetchVideos()
