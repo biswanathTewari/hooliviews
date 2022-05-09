@@ -17,6 +17,25 @@
         padding-left: $paddingH;
       }
 
+      .video__notFound {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5rem 0;
+
+        .video_errimg {
+          //height: 40vh;
+          margin-bottom: 3rem;
+          border-radius: 1rem;
+          border: 1px solid white;
+        }
+
+        h1 {
+          text-align: center;
+        }
+      }
+
       .video__creator {
         color: #b7b9d2;
         font-size: 1.25rem;

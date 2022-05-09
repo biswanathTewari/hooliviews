@@ -1,17 +1,56 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import propTypes from 'prop-types'
 
+import { useLikes, useGlobalState } from '../../../context'
 import './styles.scss'
 
-const VerticalCard = ({ title, creator, img, duration, creatorImg, id }) => {
+const VerticalCard = ({ video, isLoggedIn }) => {
+  const {
+    title = 'Loading...',
+    creator = 'loading...',
+    img,
+    duration,
+    creatorImg,
+    _id: id,
+  } = video
   const navigate = useNavigate()
+  const location = useLocation()
+  const { showToast } = useGlobalState()
+  const {
+    myLikes: { likes },
+    addLike,
+    removeLike,
+    isLiked,
+  } = useLikes()
+  const [liked, setLiked] = React.useState(false)
   const shortTitle = title.length > 20 ? `${title.substring(0, 20)}...` : title
 
   const navigationHandler = e => {
-    if (e.target.classList.contains('fas')) return
+    if (e.target.classList.contains('VerticalCard__icon')) return
     navigate(`/watch/${id}`)
   }
+
+  const likeHandler = () => {
+    if (!isLoggedIn) return navigate('/login', { state: { from: location } })
+    if (addLike) {
+      addLike(video, showToast)
+      setLiked(true)
+    }
+  }
+
+  const unlikeHandler = () => {
+    if (removeLike) {
+      removeLike(id, showToast)
+      setLiked(false)
+    }
+  }
+
+  React.useEffect(() => {
+    if (isLiked(id)) setLiked(true)
+    else setLiked(false)
+  }, [likes])
+
   return (
     <div className="VerticalCard" onClick={navigationHandler}>
       <div className="VerticalCard__imgwrapper">
@@ -29,11 +68,13 @@ const VerticalCard = ({ title, creator, img, duration, creatorImg, id }) => {
           <h3 className="text-rg">{creator ? creator : 'loading...'}</h3>
           <div className="VerticalCard__creator">
             <div className="VerticalCard__avatarwrapper">
-              <img
-                src={creatorImg}
-                alt=""
-                className="avatar avatar-large img-responsive"
-              />
+              {creatorImg && (
+                <img
+                  src={creatorImg}
+                  alt="creator avatar"
+                  className="avatar avatar-large img-responsive"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -42,11 +83,21 @@ const VerticalCard = ({ title, creator, img, duration, creatorImg, id }) => {
         </h1>
         <div className="flex-wrap">
           <p className="VerticalCard__views">53K views</p>
-          <div className="VerticalCard__iconswrapper">
-            <div className="VerticalCard__icon">
-              <i className="fas fa-thumbs-up"></i>
-              <p>like</p>
-            </div>
+          <div
+            className="VerticalCard__iconswrapper"
+            onClick={e => e.stopPropagation()}
+          >
+            {liked ? (
+              <div className="VerticalCard__icon" onClick={unlikeHandler}>
+                <i className="fas fa-thumbs-up"></i>
+                <p>unlike</p>
+              </div>
+            ) : (
+              <div className="VerticalCard__icon" onClick={likeHandler}>
+                <i className="far fa-thumbs-up"></i>
+                <p>like</p>
+              </div>
+            )}
             <div className="VerticalCard__icon">
               <i className="fas fa-clock"></i>
               <p>watch later</p>
@@ -67,14 +118,17 @@ const VerticalCard = ({ title, creator, img, duration, creatorImg, id }) => {
 }
 
 VerticalCard.propTypes = {
-  title: propTypes.string,
-  description: propTypes.string,
-  creator: propTypes.string,
-  img: propTypes.string,
-  duration: propTypes.string,
-  creatorImg: propTypes.string,
-  category: propTypes.string,
-  id: propTypes.string,
+  video: propTypes.shape({
+    title: propTypes.string,
+    description: propTypes.string,
+    creator: propTypes.string,
+    img: propTypes.string,
+    duration: propTypes.string,
+    creatorImg: propTypes.string,
+    category: propTypes.string,
+    _id: propTypes.string,
+  }),
+  isLoggedIn: propTypes.bool,
 }
 
 export { VerticalCard }
