@@ -2,10 +2,12 @@ import React from 'react'
 
 import { Navbar } from '../../components'
 import CategoryCard from './CategoryCard'
+import { useDocumentTitle } from '../../hooks'
 import { HeroSvg, LifeSvg } from '../../assets/svgs'
 import './styles.scss'
 
 const Home = () => {
+  useDocumentTitle('Home | Hooli Views')
   return (
     <div className="home">
       <Navbar />

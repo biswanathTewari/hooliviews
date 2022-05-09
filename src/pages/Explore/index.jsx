@@ -7,12 +7,15 @@ import {
   VerticalCard,
   Footer,
 } from '../../components'
-import { useVideos } from '../../context'
+import { useDocumentTitle } from '../../hooks'
+import { useVideos, useUser } from '../../context'
 import './styles.scss'
 
 const Explore = () => {
+  const { isLoggedIn } = useUser()
   const { myVideos, fetchVideos } = useVideos()
   const { videos, isLoading } = myVideos
+  useDocumentTitle('Explore | Hooli Views')
 
   React.useEffect(() => {
     fetchVideos()
@@ -32,23 +35,16 @@ const Explore = () => {
                 {[...new Array(10)].map((_, index) => (
                   <VerticalCard
                     key={index}
-                    title="Loading..."
-                    creator="loading..."
+                    video={{ title: '', category: '' }}
                   />
                 ))}
               </>
             ) : (
               videos.map(video => (
                 <VerticalCard
-                  creator={video.creator}
-                  title={video.title}
-                  duration={video.duration}
-                  img={video.img}
-                  creatorImg={video.creatorImg}
-                  category={video.category}
-                  id={video._id}
-                  description={video.description}
+                  video={video}
                   key={video._id}
+                  isLoggedIn={isLoggedIn}
                 />
               ))
             )}
