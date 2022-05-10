@@ -9,7 +9,13 @@ import {
   VerticalCard,
   Loader,
 } from '../../components'
-import { useVideos, useGlobalState, useLikes, useUser } from '../../context'
+import {
+  useVideos,
+  useGlobalState,
+  useLikes,
+  useUser,
+  useWatchLater,
+} from '../../context'
 import { useDocumentTitle } from '../../hooks'
 import notFoundGif from '../../assets/lotties/notFound.gif'
 import { getVideosByIdService } from '../../services'
@@ -26,10 +32,17 @@ const Video = () => {
     removeLike,
     isLiked,
   } = useLikes()
+  const {
+    myWatchLater: { WatchLater },
+    addToWatchLater,
+    removeFromWatchLater,
+    isSavedForLater,
+  } = useWatchLater()
   const { isLoggedIn } = useUser()
   const [isLoading, setIsLoading] = React.useState(true)
   const [notFound, setNotFound] = React.useState(false)
   const [liked, setLiked] = React.useState(false)
+  const [savedForLater, setSavedForLater] = React.useState(false)
   const [video, setVideo] = React.useState({})
   const scrollRef = React.useRef(null)
   const { myVideos, fetchVideos } = useVideos()
@@ -52,25 +65,18 @@ const Video = () => {
     }
   }
 
-  const likeHandler = () => {
+  const protectedFeat = (feature, ...rest) => {
     if (!isLoggedIn) return navigate('/login', { state: { from: location } })
-    if (addLike) {
-      addLike(video, showToast)
-      setLiked(true)
-    }
-  }
-
-  const unlikeHandler = () => {
-    if (removeLike) {
-      removeLike(id, showToast)
-      setLiked(false)
-    }
+    return feature(...rest)
   }
 
   React.useEffect(() => {
     if (isLiked(id)) setLiked(true)
     else setLiked(false)
-  }, [likes, id])
+
+    if (isSavedForLater(id)) setSavedForLater(true)
+    else setSavedForLater(false)
+  }, [likes, WatchLater, id])
 
   React.useEffect(() => {
     if (video.title) setDocTitle(video.title)
@@ -129,21 +135,50 @@ const Video = () => {
                     {liked ? (
                       <div
                         className="VerticalCard__icon"
-                        onClick={unlikeHandler}
+                        onClick={() => removeLike(id, showToast, setLiked)}
                       >
                         <i className="fas fa-thumbs-up"></i>
                         <p>unlike</p>
                       </div>
                     ) : (
-                      <div className="VerticalCard__icon" onClick={likeHandler}>
+                      <div
+                        className="VerticalCard__icon"
+                        onClick={() =>
+                          protectedFeat(addLike, video, showToast, setLiked)
+                        }
+                      >
                         <i className="far fa-thumbs-up"></i>
                         <p>like</p>
                       </div>
                     )}
-                    <div className="VerticalCard__icon">
-                      <i className="fas fa-clock"></i>
-                      <p>watch later</p>
-                    </div>
+
+                    {savedForLater ? (
+                      <div
+                        className="VerticalCard__icon"
+                        onClick={() =>
+                          removeFromWatchLater(id, showToast, setSavedForLater)
+                        }
+                      >
+                        <i className="fas fa-clock"></i>
+                        <p>watch later</p>
+                      </div>
+                    ) : (
+                      <div
+                        className="VerticalCard__icon"
+                        onClick={() =>
+                          protectedFeat(
+                            addToWatchLater,
+                            video,
+                            showToast,
+                            setSavedForLater,
+                          )
+                        }
+                      >
+                        <i className="far fa-clock"></i>
+                        <p>watch later</p>
+                      </div>
+                    )}
+
                     <div className="VerticalCard__icon">
                       <i className="fas fa-plus"></i>
                       <p>playlist</p>
