@@ -21,7 +21,7 @@ const WatchLaterReducer = (state, action) => {
       return {
         ...state,
         isLoading: false,
-        WatchLater: action.payload.WatchLater,
+        WatchLater: action.payload.watchlater,
       }
     case actions.fetchWatchLaterFailure:
       return {
@@ -57,10 +57,10 @@ const WatchLaterprovider = ({ children }) => {
   const fetchWatchLater = async showToast => {
     dispatchWatchLater({ type: actions.fetchWatchLater })
     try {
-      const WatchLater = await getWatchLaterVideoServices()
+      const res = await getWatchLaterVideoServices()
       return dispatchWatchLater({
         type: actions.fetchWatchLaterSuccess,
-        payload: WatchLater,
+        payload: res,
       })
     } catch (error) {
       showToast({
