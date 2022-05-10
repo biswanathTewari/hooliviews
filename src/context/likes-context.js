@@ -65,10 +65,11 @@ const Likesprovider = ({ children }) => {
     }
   }
 
-  const addLike = async (video, showToast) => {
+  const addLike = async (video, showToast, setLiked) => {
     try {
       const res = await likeVideoService(video)
-      return dispatchLikes({ type: actions.addLike, payload: res.likes })
+      dispatchLikes({ type: actions.addLike, payload: res.likes })
+      return setLiked(true)
     } catch (error) {
       console.log(error)
       showToast({
@@ -78,10 +79,11 @@ const Likesprovider = ({ children }) => {
     }
   }
 
-  const removeLike = async (videoId, showToast) => {
+  const removeLike = async (videoId, showToast, setLiked) => {
     try {
       const res = await removeLikeService(videoId)
-      return dispatchLikes({ type: actions.removeLike, payload: res.likes })
+      dispatchLikes({ type: actions.removeLike, payload: res.likes })
+      return setLiked(false)
     } catch (error) {
       showToast({
         message: 'Oops something went wrong, please try again!',

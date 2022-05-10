@@ -11,4 +11,9 @@ export const actions = {
   fetchLikesFailure: 'FETCH_LIKES_FAILURE',
   addLike: 'ADD_LIKE',
   removeLike: 'REMOVE_LIKE',
+  fetchWatchLater: 'FETCH_WATCH_LATER',
+  fetchWatchLaterSuccess: 'FETCH_WATCH_LATER_SUCCESS',
+  fetchWatchLaterFailure: 'FETCH_WATCH_LATER_FAILURE',
+  addToWatchLater: 'ADD_TO_WATCH_LATER',
+  removeFromWatchLater: 'REMOVE_FROM_WATCH_LATER',
 }
