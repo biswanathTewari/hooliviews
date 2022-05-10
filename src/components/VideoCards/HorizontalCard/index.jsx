@@ -21,6 +21,7 @@ const HorizontalCard = ({ video }) => {
     myLikes: { likes },
     addLike,
     removeLike,
+    isLiked,
   } = useLikes()
   const {
     myWatchLater: { WatchLater },
@@ -40,9 +41,9 @@ const HorizontalCard = ({ video }) => {
   }
 
   React.useEffect(() => {
-    if (likes?.includes(video)) {
-      setLiked(true)
-    }
+    if (isLiked(id)) setLiked(true)
+    else setLiked(false)
+
     if (isSavedForLater(id)) setSavedForLater(true)
     else setSavedForLater(false)
   }, [likes, WatchLater])
