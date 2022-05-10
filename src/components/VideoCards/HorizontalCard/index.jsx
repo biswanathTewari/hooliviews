@@ -2,10 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import propTypes from 'prop-types'
 
-import { useGlobalState, useLikes } from '../../../context'
+import { useGlobalState, useLikes, useWatchLater } from '../../../context'
 import './styles.scss'
 
 const HorizontalCard = ({ video }) => {
+  const navigate = useNavigate()
+  const { showToast } = useGlobalState()
   const {
     title = 'Loading...',
     creator = 'loading...',
@@ -15,14 +17,19 @@ const HorizontalCard = ({ video }) => {
     category,
     _id: id,
   } = video
-  const navigate = useNavigate()
-  const { showToast } = useGlobalState()
   const {
     myLikes: { likes },
     addLike,
     removeLike,
   } = useLikes()
+  const {
+    myWatchLater: { WatchLater },
+    addToWatchLater,
+    removeFromWatchLater,
+    isSavedForLater,
+  } = useWatchLater()
   const [liked, setLiked] = React.useState(false)
+  const [savedForLater, setSavedForLater] = React.useState(false)
   const shortTitle = title.length > 20 ? `${title.substring(0, 20)}...` : title
   const shortDescription =
     description.length > 20 ? `${description.substring(0, 25)}...` : description
@@ -32,27 +39,13 @@ const HorizontalCard = ({ video }) => {
     navigate(`/watch/${id}`)
   }
 
-  const likeHandler = e => {
-    e.stopPropagation()
-    if (addLike) {
-      addLike(video, showToast)
-      setLiked(true)
-    }
-  }
-
-  const unlikeHandler = e => {
-    e.stopPropagation()
-    if (removeLike) {
-      removeLike(id, showToast)
-      setLiked(false)
-    }
-  }
-
   React.useEffect(() => {
     if (likes?.includes(video)) {
       setLiked(true)
     }
-  }, [])
+    if (isSavedForLater(id)) setSavedForLater(true)
+    else setSavedForLater(false)
+  }, [likes, WatchLater])
 
   return (
     <div className="HorizontalCard" onClick={navigationHandler}>
@@ -74,22 +67,50 @@ const HorizontalCard = ({ video }) => {
         <h1 className="HorizontalCard__description">{shortDescription}</h1>
         <div className="flex-wrap">
           <p className="HorizontalCard__views">53K views | {category}</p>
-          <div className="HorizontalCard__iconswrapper">
+          <div
+            className="HorizontalCard__iconswrapper"
+            onClick={e => e.stopPropagation()}
+          >
             {liked ? (
-              <div className="HorizontalCard__icon" onClick={unlikeHandler}>
+              <div
+                className="HorizontalCard__icon"
+                onClick={() => removeLike(id, showToast, setLiked)}
+              >
                 <i className="fas fa-thumbs-up"></i>
                 <p>unlike</p>
               </div>
             ) : (
-              <div className="HorizontalCard__icon" onClick={likeHandler}>
+              <div
+                className="HorizontalCard__icon"
+                onClick={() => addLike(video, showToast, setLiked)}
+              >
                 <i className="far fa-thumbs-up"></i>
                 <p>like</p>
               </div>
             )}
-            <div className="HorizontalCard__icon">
-              <i className="fas fa-clock"></i>
-              <p>watch later</p>
-            </div>
+
+            {savedForLater ? (
+              <div
+                className="HorizontalCard__icon"
+                onClick={() =>
+                  removeFromWatchLater(id, showToast, setSavedForLater)
+                }
+              >
+                <i className="fas fa-clock"></i>
+                <p>watch later</p>
+              </div>
+            ) : (
+              <div
+                className="HorizontalCard__icon"
+                onClick={() =>
+                  addToWatchLater(video, showToast, setSavedForLater)
+                }
+              >
+                <i className="far fa-clock"></i>
+                <p>watch later</p>
+              </div>
+            )}
+
             <div className="HorizontalCard__icon">
               <i className="fas fa-plus"></i>
               <p>playlist</p>
