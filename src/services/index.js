@@ -6,6 +6,17 @@ import {
   likeVideoService,
   removeLikeService,
 } from './likes.service'
+import {
+  getWatchLaterVideoServices,
+  watchLaterVideoService,
+  removeWatchLaterService,
+} from './watchlater.service'
+import {
+  getHistoryService,
+  addToHistoryService,
+  removeFromHistoryService,
+  clearHistoryService,
+} from './history.service'
 
 export {
   callApi,
@@ -16,4 +27,11 @@ export {
   getLikedVideoServices,
   likeVideoService,
   removeLikeService,
+  getWatchLaterVideoServices,
+  watchLaterVideoService,
+  removeWatchLaterService,
+  getHistoryService,
+  addToHistoryService,
+  removeFromHistoryService,
+  clearHistoryService,
 }

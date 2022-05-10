@@ -57,12 +57,21 @@
       .history__list {
         flex-grow: 1;
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: flex-end;
         overflow-y: auto;
         row-gap: 1.25rem;
         overflow: visible;
         margin-bottom: 2rem;
+        height: fit-content;
+
+        .history__empty {
+          height: fit-content;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
       }
     }
   }

@@ -2,10 +2,13 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import propTypes from 'prop-types'
 
-import { useLikes, useGlobalState } from '../../../context'
+import { useLikes, useWatchLater, useGlobalState } from '../../../context'
 import './styles.scss'
 
 const VerticalCard = ({ video, isLoggedIn }) => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { showToast } = useGlobalState()
   const {
     title = 'Loading...',
     creator = 'loading...',
@@ -14,16 +17,20 @@ const VerticalCard = ({ video, isLoggedIn }) => {
     creatorImg,
     _id: id,
   } = video
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { showToast } = useGlobalState()
   const {
     myLikes: { likes },
     addLike,
     removeLike,
     isLiked,
   } = useLikes()
+  const {
+    myWatchLater: { WatchLater },
+    addToWatchLater,
+    removeFromWatchLater,
+    isSavedForLater,
+  } = useWatchLater()
   const [liked, setLiked] = React.useState(false)
+  const [savedForLater, setSavedForLater] = React.useState(false)
   const shortTitle = title.length > 20 ? `${title.substring(0, 20)}...` : title
 
   const navigationHandler = e => {
@@ -31,25 +38,18 @@ const VerticalCard = ({ video, isLoggedIn }) => {
     navigate(`/watch/${id}`)
   }
 
-  const likeHandler = () => {
+  const protectedFeat = (feature, ...rest) => {
     if (!isLoggedIn) return navigate('/login', { state: { from: location } })
-    if (addLike) {
-      addLike(video, showToast)
-      setLiked(true)
-    }
-  }
-
-  const unlikeHandler = () => {
-    if (removeLike) {
-      removeLike(id, showToast)
-      setLiked(false)
-    }
+    return feature(...rest)
   }
 
   React.useEffect(() => {
     if (isLiked(id)) setLiked(true)
     else setLiked(false)
-  }, [likes])
+
+    if (isSavedForLater(id)) setSavedForLater(true)
+    else setSavedForLater(false)
+  }, [likes, WatchLater])
 
   return (
     <div className="VerticalCard" onClick={navigationHandler}>
@@ -88,20 +88,51 @@ const VerticalCard = ({ video, isLoggedIn }) => {
             onClick={e => e.stopPropagation()}
           >
             {liked ? (
-              <div className="VerticalCard__icon" onClick={unlikeHandler}>
+              <div
+                className="VerticalCard__icon"
+                onClick={() => removeLike(id, showToast, setLiked)}
+              >
                 <i className="fas fa-thumbs-up"></i>
                 <p>unlike</p>
               </div>
             ) : (
-              <div className="VerticalCard__icon" onClick={likeHandler}>
+              <div
+                className="VerticalCard__icon"
+                onClick={() =>
+                  protectedFeat(addLike, video, showToast, setLiked)
+                }
+              >
                 <i className="far fa-thumbs-up"></i>
                 <p>like</p>
               </div>
             )}
-            <div className="VerticalCard__icon">
-              <i className="fas fa-clock"></i>
-              <p>watch later</p>
-            </div>
+
+            {savedForLater ? (
+              <div
+                className="VerticalCard__icon"
+                onClick={() =>
+                  removeFromWatchLater(id, showToast, setSavedForLater)
+                }
+              >
+                <i className="fas fa-clock"></i>
+                <p>watch later</p>
+              </div>
+            ) : (
+              <div
+                className="VerticalCard__icon"
+                onClick={() =>
+                  protectedFeat(
+                    addToWatchLater,
+                    video,
+                    showToast,
+                    setSavedForLater,
+                  )
+                }
+              >
+                <i className="far fa-clock"></i>
+                <p>watch later</p>
+              </div>
+            )}
             <div className="VerticalCard__icon">
               <i className="fas fa-plus"></i>
               <p>playlist</p>
