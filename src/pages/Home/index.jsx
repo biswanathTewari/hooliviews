@@ -1,13 +1,16 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Navbar } from '../../components'
 import CategoryCard from './CategoryCard'
 import { useDocumentTitle } from '../../hooks'
-import { HeroSvg, LifeSvg } from '../../assets/svgs'
+import { HeroSvg } from '../../assets/svgs'
 import './styles.scss'
 
 const Home = () => {
+  const navigate = useNavigate()
   useDocumentTitle('Home | Hooli Views')
+
   return (
     <div className="home">
       <Navbar />
@@ -26,18 +29,18 @@ const Home = () => {
         <article className="home__categories">
           <CategoryCard
             text="Life is either a daring adventure or nothing at all. "
-            img={LifeSvg}
             type="life"
+            onClick={() => navigate('/explore')}
           />
           <CategoryCard
             text="tech is another name for hooli"
-            img={LifeSvg}
             type="tech"
+            onClick={() => navigate('/explore')}
           />
           <CategoryCard
             text="Noodles are everybody's happy food"
-            img={LifeSvg}
             type="noodles"
+            onClick={() => navigate('/explore')}
           />
         </article>
       </main>
