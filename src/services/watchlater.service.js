@@ -17,6 +17,5 @@ export async function removeWatchLaterService(videoId) {
   const response = await callApi(`/api/user/watchlater/${videoId}`, {
     method: 'DELETE',
   })
-  console.log('response', response)
   return response
 }

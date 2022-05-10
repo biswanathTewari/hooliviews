@@ -16,4 +16,10 @@ export const actions = {
   fetchWatchLaterFailure: 'FETCH_WATCH_LATER_FAILURE',
   addToWatchLater: 'ADD_TO_WATCH_LATER',
   removeFromWatchLater: 'REMOVE_FROM_WATCH_LATER',
+  fetchHistory: 'FETCH_HISTORY',
+  fetchHistorySuccess: 'FETCH_HISTORY_SUCCESS',
+  fetchHistoryFailure: 'FETCH_HISTORY_FAILURE',
+  addToHistory: 'ADD_TO_HISTORY',
+  removeFromHistory: 'REMOVE_FROM_HISTORY',
+  clearHistory: 'CLEAR_HISTORY',
 }
