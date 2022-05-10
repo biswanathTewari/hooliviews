@@ -5,7 +5,11 @@ import propTypes from 'prop-types'
 import { useGlobalState, useLikes, useWatchLater } from '../../../context'
 import './styles.scss'
 
-const HorizontalCard = ({ video }) => {
+const HorizontalCard = ({
+  video,
+  deleteHistory = false,
+  onDeleteHistory = () => {},
+}) => {
   const navigate = useNavigate()
   const { showToast } = useGlobalState()
   const {
@@ -112,10 +116,17 @@ const HorizontalCard = ({ video }) => {
               </div>
             )}
 
-            <div className="HorizontalCard__icon">
-              <i className="fas fa-plus"></i>
-              <p>playlist</p>
-            </div>
+            {deleteHistory ? (
+              <div className="HorizontalCard__icon" onClick={onDeleteHistory}>
+                <i className="fas fa-trash-alt"></i>
+                <p>delete</p>
+              </div>
+            ) : (
+              <div className="HorizontalCard__icon">
+                <i className="fas fa-plus"></i>
+                <p>playlist</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -137,6 +148,8 @@ HorizontalCard.propTypes = {
     category: propTypes.string,
     _id: propTypes.string,
   }),
+  deleteHistory: propTypes.bool,
+  onDeleteHistory: propTypes.func,
 }
 
 export { HorizontalCard }

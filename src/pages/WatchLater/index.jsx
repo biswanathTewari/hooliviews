@@ -26,10 +26,6 @@ const WatchLater = () => {
   useDocumentTitle('Watch Later | Hooli Views')
 
   React.useEffect(() => {
-    console.log(myWatchLater)
-  }, [myWatchLater])
-
-  React.useEffect(() => {
     fetchWatchLater(showToast)
   }, [])
   return (

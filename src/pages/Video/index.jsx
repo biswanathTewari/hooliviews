@@ -15,6 +15,7 @@ import {
   useLikes,
   useUser,
   useWatchLater,
+  useHistory,
 } from '../../context'
 import { useDocumentTitle } from '../../hooks'
 import notFoundGif from '../../assets/lotties/notFound.gif'
@@ -39,6 +40,7 @@ const Video = () => {
     isSavedForLater,
   } = useWatchLater()
   const { isLoggedIn } = useUser()
+  const { addToHistory, removeFromHistory, isWatched } = useHistory()
   const [isLoading, setIsLoading] = React.useState(true)
   const [notFound, setNotFound] = React.useState(false)
   const [liked, setLiked] = React.useState(false)
@@ -70,6 +72,15 @@ const Video = () => {
     return feature(...rest)
   }
 
+  const appendToHistory = async () => {
+    if (!isLoggedIn) return
+    if (!isWatched(video._id) && video) addToHistory(video)
+    else {
+      await removeFromHistory(video._id, showToast)
+      addToHistory(video)
+    }
+  }
+
   React.useEffect(() => {
     if (isLiked(id)) setLiked(true)
     else setLiked(false)
@@ -79,7 +90,10 @@ const Video = () => {
   }, [likes, WatchLater, id])
 
   React.useEffect(() => {
-    if (video.title) setDocTitle(video.title)
+    if (video._id) {
+      if (video.title) setDocTitle(video.title)
+      appendToHistory()
+    }
   }, [video])
 
   React.useEffect(() => {
