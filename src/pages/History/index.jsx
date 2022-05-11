@@ -73,21 +73,21 @@ const History = () => {
                 initial="hidden"
                 animate="show"
                 exit="exit"
+                layout
               >
                 {history.length > 0 ? (
-                  history.map(video => (
-                    <React.Fragment key={video._id}>
-                      {video._id && (
-                        <HorizontalCard
-                          video={video}
-                          deleteHistory={true}
-                          onDeleteHistory={() =>
-                            removeFromHistory(video._id, showToast)
-                          }
-                        />
-                      )}
-                    </React.Fragment>
-                  ))
+                  [...history]
+                    .reverse()
+                    .map(video => (
+                      <HorizontalCard
+                        video={video}
+                        key={video._id}
+                        deleteHistory={true}
+                        onDeleteHistory={() =>
+                          removeFromHistory(video._id, showToast)
+                        }
+                      />
+                    ))
                 ) : (
                   <div className="history__empty">
                     <Lottie options={defaultOptions} height="30rem" speed={1} />

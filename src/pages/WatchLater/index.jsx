@@ -65,6 +65,7 @@ const WatchLater = () => {
                 initial="hidden"
                 animate="show"
                 exit="exit"
+                layout
               >
                 {list.length > 0 ? (
                   list.map(video => (

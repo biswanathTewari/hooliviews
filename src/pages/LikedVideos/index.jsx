@@ -65,6 +65,7 @@ const LikedVideos = () => {
                 initial="hidden"
                 animate="show"
                 exit="exit"
+                layout
               >
                 {likes.length > 0 ? (
                   likes.map(video => (
