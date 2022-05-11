@@ -1,8 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import propTypes from 'prop-types'
+import { motion } from 'framer-motion'
 
 import { useGlobalState, useLikes, useWatchLater } from '../../../context'
+import { slider } from '../../../utils'
 import './styles.scss'
 
 const HorizontalCard = ({
@@ -53,7 +55,15 @@ const HorizontalCard = ({
   }, [likes, WatchLater])
 
   return (
-    <div className="HorizontalCard" onClick={navigationHandler}>
+    <motion.div
+      className="HorizontalCard"
+      onClick={navigationHandler}
+      variants={slider}
+      whileHover={{
+        scale: 1.1,
+        transition: { duration: 0.1, ease: 'circIn' },
+      }}
+    >
       <div className="HorizontalCard__imgwrapper">
         {img && (
           <img
@@ -134,7 +144,7 @@ const HorizontalCard = ({
       <div className="HorizontalCard__durationWrapper">
         <span className="HorizontalCard__duration">{duration}</span>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

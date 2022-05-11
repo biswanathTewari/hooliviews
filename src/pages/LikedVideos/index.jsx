@@ -1,5 +1,6 @@
 import React from 'react'
 import Lottie from 'react-lottie'
+import { motion } from 'framer-motion'
 
 import {
   Navbar,
@@ -11,6 +12,7 @@ import {
 import { useLikes } from '../../context'
 import { useDocumentTitle } from '../../hooks'
 import animation from '../../assets/lotties/empty.json'
+import { fadingParent, sliderHolder } from '../../utils'
 import './styles.scss'
 
 const defaultOptions = {
@@ -29,7 +31,13 @@ const LikedVideos = () => {
   }, [])
 
   return (
-    <div className="likedvideos">
+    <motion.div
+      className="likedvideos"
+      variants={fadingParent}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+    >
       <Navbar />
       <main className="likedvideos__container">
         <Sidebar />
@@ -40,18 +48,24 @@ const LikedVideos = () => {
             <h1 className="h4">Liked videos</h1>
             <p className="text-rg">{likes.length} videos | </p>
           </div>
-          <div className="likedvideos__list">
+          <>
             {isLoading ? (
-              <>
+              <div>
                 {[...new Array(10)].map((_, index) => (
                   <HorizontalCard
                     key={index}
                     video={{ title: '', category: '' }}
                   />
                 ))}
-              </>
+              </div>
             ) : (
-              <>
+              <motion.div
+                className="likedvideos__list"
+                variants={sliderHolder}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+              >
                 {likes.length > 0 ? (
                   likes.map(video => (
                     <HorizontalCard video={video} key={video._id} />
@@ -62,13 +76,13 @@ const LikedVideos = () => {
                     <p className="text-rg">Nothing to see here :P</p>
                   </div>
                 )}
-              </>
+              </motion.div>
             )}
-          </div>
+          </>
         </article>
       </main>
       <Footer />
-    </div>
+    </motion.div>
   )
 }
 
