@@ -1,5 +1,6 @@
 import React from 'react'
 import Lottie from 'react-lottie'
+import { motion } from 'framer-motion'
 
 import {
   Navbar,
@@ -11,6 +12,7 @@ import {
 import { useHistory, useGlobalState } from '../../context'
 import { useDocumentTitle } from '../../hooks'
 import animation from '../../assets/lotties/empty.json'
+import { fadingParent, sliderHolder } from '../../utils'
 import './styles.scss'
 
 const defaultOptions = {
@@ -31,7 +33,13 @@ const History = () => {
   }, [])
 
   return (
-    <div className="history">
+    <motion.div
+      className="history"
+      variants={fadingParent}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+    >
       <Navbar />
       <main className="history__container">
         <Sidebar />
@@ -48,45 +56,51 @@ const History = () => {
               Reset <i className={`fas fa-history`}></i>
             </div>
           </div>
-          <div className="history__list">
+          <>
             {isLoading ? (
-              <>
+              <div className="history__list">
                 {[...new Array(10)].map((_, index) => (
                   <HorizontalCard
                     key={index}
                     video={{ title: '', category: '' }}
                   />
                 ))}
-              </>
+              </div>
             ) : (
-              <>
+              <motion.div
+                className="history__list"
+                variants={sliderHolder}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                layout
+              >
                 {history.length > 0 ? (
-                  history.map(video => (
-                    <React.Fragment key={video._id}>
-                      {video._id && (
-                        <HorizontalCard
-                          video={video}
-                          deleteHistory={true}
-                          onDeleteHistory={() =>
-                            removeFromHistory(video._id, showToast)
-                          }
-                        />
-                      )}
-                    </React.Fragment>
-                  ))
+                  [...history]
+                    .reverse()
+                    .map(video => (
+                      <HorizontalCard
+                        video={video}
+                        key={video._id}
+                        deleteHistory={true}
+                        onDeleteHistory={() =>
+                          removeFromHistory(video._id, showToast)
+                        }
+                      />
+                    ))
                 ) : (
                   <div className="history__empty">
                     <Lottie options={defaultOptions} height="30rem" speed={1} />
                     <p className="text-rg">Nothing to see here :P</p>
                   </div>
                 )}
-              </>
+              </motion.div>
             )}
-          </div>
+          </>
         </article>
       </main>
       <Footer />
-    </div>
+    </motion.div>
   )
 }
 

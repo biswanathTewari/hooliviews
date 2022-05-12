@@ -1,5 +1,6 @@
 import React from 'react'
 import Lottie from 'react-lottie'
+import { motion } from 'framer-motion'
 
 import {
   Navbar,
@@ -11,6 +12,7 @@ import {
 import { useWatchLater, useGlobalState } from '../../context'
 import { useDocumentTitle } from '../../hooks'
 import animation from '../../assets/lotties/empty.json'
+import { fadingParent, sliderHolder } from '../../utils'
 import './styles.scss'
 
 const defaultOptions = {
@@ -29,7 +31,13 @@ const WatchLater = () => {
     fetchWatchLater(showToast)
   }, [])
   return (
-    <div className="watchlater">
+    <motion.div
+      className="watchlater"
+      variants={fadingParent}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+    >
       <Navbar />
       <main className="watchlater__container">
         <Sidebar />
@@ -40,18 +48,25 @@ const WatchLater = () => {
             <h1 className="h4">Watch Later</h1>
             <p className="text-rg">{list.length} videos | </p>
           </div>
-          <div className="watchlater__list">
+          <>
             {isLoading ? (
-              <>
+              <div className="watchlater__list">
                 {[...new Array(10)].map((_, index) => (
                   <HorizontalCard
                     key={index}
                     video={{ title: '', category: '' }}
                   />
                 ))}
-              </>
+              </div>
             ) : (
-              <>
+              <motion.div
+                className="watchlater__list"
+                variants={sliderHolder}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                layout
+              >
                 {list.length > 0 ? (
                   list.map(video => (
                     <HorizontalCard video={video} key={video._id} />
@@ -62,13 +77,13 @@ const WatchLater = () => {
                     <p className="text-rg">Nothing to see here :P</p>
                   </div>
                 )}
-              </>
+              </motion.div>
             )}
-          </div>
+          </>
         </article>
       </main>
       <Footer />
-    </div>
+    </motion.div>
   )
 }
 
