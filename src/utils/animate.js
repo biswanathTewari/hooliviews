@@ -80,7 +80,7 @@ export const slider = {
     opacity: 1,
     transition: {
       duration: 1,
-      ease: 'easeOut',
+      ease: 'easeIn',
     },
   },
 }
