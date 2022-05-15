@@ -90,3 +90,23 @@ export const sliderHolder = {
   hidden: { opacity: 1 },
   show: { opacity: 1, transition: { staggerChildren: 0.1, ease: 'easeOut' } },
 }
+
+export const zoom = {
+  hidden: {
+    scale: -1,
+    opacity: 0,
+  },
+
+  show: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.35,
+      ease: 'easeOut',
+    },
+  },
+  exit: {
+    scale: 0.5,
+    opacity: 0,
+  },
+}
