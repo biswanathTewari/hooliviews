@@ -14,6 +14,7 @@ import {
   Signup,
   Playlist,
   NotFound,
+  ComingSoon,
 } from '../pages'
 
 const Navigation = () => {
@@ -23,6 +24,10 @@ const Navigation = () => {
       <Route path="/" exact element={<Home />} />
       <Route path="/explore" element={<Explore />} />
       <Route path="/watch/:id" element={<Video />} />
+      <Route path="/live" element={<ComingSoon />} />
+      <Route path="/tutorials" element={<ComingSoon />} />
+      <Route path="/competition" element={<ComingSoon />} />
+      <Route path="/community" element={<ComingSoon />} />
 
       {/* auth routes */}
       <Route path="/login" element={<Login />} />

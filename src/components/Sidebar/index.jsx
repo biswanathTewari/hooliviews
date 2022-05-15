@@ -47,10 +47,10 @@ const Sidebar = () => {
       <section className="sidebar__section mt">
         <h1 className="sidebar__title">CATEGORY</h1>
         <ul className="sidebar__navs">
-          <NavLink to="/something" text="Live" icon="fa-satellite-dish" />
-          <NavLink to="/something" text="Tutorials" icon="fa-arrow-right" />
-          <NavLink to="/something" text="Competition" icon="fa-crown" />
-          <NavLink to="/something" text="Community" icon="fa-headphones" />
+          <NavLink to="/live" text="Live" icon="fa-satellite-dish" />
+          <NavLink to="/tutorials" text="Tutorials" icon="fa-arrow-right" />
+          <NavLink to="/competition" text="Competition" icon="fa-crown" />
+          <NavLink to="/community" text="Community" icon="fa-headphones" />
         </ul>
         <div className="sidebar__line"></div>
       </section>
