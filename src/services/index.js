@@ -17,6 +17,14 @@ import {
   removeFromHistoryService,
   clearHistoryService,
 } from './history.service'
+import {
+  getPlaylistsService,
+  getPlaylistService,
+  addToPlaylistService,
+  removeFromPlaylistService,
+  createPlaylistService,
+  deletePlaylistService,
+} from './playlist.service'
 
 export {
   callApi,
@@ -34,4 +42,10 @@ export {
   addToHistoryService,
   removeFromHistoryService,
   clearHistoryService,
+  getPlaylistsService,
+  getPlaylistService,
+  addToPlaylistService,
+  removeFromPlaylistService,
+  createPlaylistService,
+  deletePlaylistService,
 }
