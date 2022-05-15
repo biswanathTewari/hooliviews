@@ -32,6 +32,13 @@
     .playlistmodal__list {
       width: fit-content;
       margin: 1rem 0;
+      height: 15rem;
+      width: 100%;
+      overflow-y: auto;
+
+      @include respond(phone) {
+        height: 18rem;
+      }
 
       .playlist__item {
         margin-bottom: 1rem;
