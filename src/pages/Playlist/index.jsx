@@ -141,7 +141,7 @@ const Playlist = () => {
             ) : (
               <>
                 {playlists.length === 0 ? (
-                  <div className="playlist__empty my-2">
+                  <div className="playlist__empty my-5">
                     <Lottie
                       options={eyesAnimOptions}
                       height="15rem"
