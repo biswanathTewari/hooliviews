@@ -9,8 +9,8 @@ import './styles.scss'
 
 const HorizontalCard = ({
   video,
-  deleteHistory = false,
-  onDeleteHistory = () => {},
+  shouldDelete = false,
+  onDelete = () => {},
   openPlaylistModal = () => {},
 }) => {
   const navigate = useNavigate()
@@ -127,8 +127,8 @@ const HorizontalCard = ({
               </div>
             )}
 
-            {deleteHistory ? (
-              <div className="HorizontalCard__icon" onClick={onDeleteHistory}>
+            {shouldDelete ? (
+              <div className="HorizontalCard__icon" onClick={onDelete}>
                 <i className="fas fa-trash-alt"></i>
                 <p>delete</p>
               </div>
@@ -162,8 +162,8 @@ HorizontalCard.propTypes = {
     category: propTypes.string,
     _id: propTypes.string,
   }),
-  deleteHistory: propTypes.bool,
-  onDeleteHistory: propTypes.func,
+  shouldDelete: propTypes.bool,
+  onDelete: propTypes.func,
   openPlaylistModal: propTypes.func,
 }
 

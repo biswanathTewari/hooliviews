@@ -110,3 +110,15 @@ export const zoom = {
     opacity: 0,
   },
 }
+
+export const drop = {
+  hidden: { y: '-130%', opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1,
+      ease: 'easeIn',
+    },
+  },
+}

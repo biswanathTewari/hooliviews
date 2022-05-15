@@ -40,6 +40,7 @@ const Sidebar = () => {
           <NavLink to="/liked" text="liked" icon="fa-thumbs-up" />
           <NavLink to="/watchlater" text="watch later" icon="fa-clock" />
           <NavLink to="/history" text="history" icon="fa-history" />
+          <NavLink to="/playlist" text="playlist" icon="fa-list-alt" />
         </ul>
         <div className="sidebar__line"></div>
       </section>

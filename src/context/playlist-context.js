@@ -179,6 +179,13 @@ const PlaylistProvider = ({ children }) => {
     return playlist.videos.find(video => video._id === videoId) ? true : false
   }
 
+  const getSelectedVideo = playlistId => {
+    const res = myPlaylists.playlists.find(
+      playlist => playlist._id === playlistId,
+    )
+    return res ? res : null
+  }
+
   return (
     <PlaylistContext.Provider
       value={{
@@ -190,6 +197,7 @@ const PlaylistProvider = ({ children }) => {
         addToPlaylist,
         removeFromPlaylist,
         videoExistsInPlaylist,
+        getSelectedVideo,
       }}
     >
       {children}

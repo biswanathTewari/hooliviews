@@ -82,10 +82,8 @@ const History = () => {
                       <HorizontalCard
                         video={video}
                         key={video._id}
-                        deleteHistory={true}
-                        onDeleteHistory={() =>
-                          removeFromHistory(video._id, showToast)
-                        }
+                        shouldDelete={true}
+                        onDelete={() => removeFromHistory(video._id, showToast)}
                       />
                     ))
                 ) : (
