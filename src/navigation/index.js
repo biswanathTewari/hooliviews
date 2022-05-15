@@ -13,6 +13,7 @@ import {
   Login,
   Signup,
   Playlist,
+  NotFound,
 } from '../pages'
 
 const Navigation = () => {
@@ -61,6 +62,8 @@ const Navigation = () => {
         }
       />
 
+      {/* 404 */}
+      <Route path="*" element={<NotFound />} />
       <Route path="mockapi" element={<Mockman />} />
     </Routes>
   )
