@@ -37,6 +37,7 @@ const MobileNav = () => {
         <NavLink to="/explore" text="Explore" icon="fa-compass" />
         <NavLink to="/liked" text="Liked" icon="fa-thumbs-up" />
         <NavLink to="/watchlater" text="Watch later" icon="fa-clock" />
+        <NavLink to="/playlist" text="playlist" icon="fa-list-alt" />
         <NavLink to="/history" text="history" icon="fa-history" />
       </ul>
     </div>

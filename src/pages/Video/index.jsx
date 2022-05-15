@@ -8,6 +8,7 @@ import {
   MobileNav,
   VerticalCard,
   Loader,
+  PlaylistModal,
 } from '../../components'
 import {
   useVideos,
@@ -17,7 +18,7 @@ import {
   useWatchLater,
   useHistory,
 } from '../../context'
-import { useDocumentTitle } from '../../hooks'
+import { useDocumentTitle, usePlaylistModal } from '../../hooks'
 import notFoundGif from '../../assets/lotties/notFound.gif'
 import { getVideosByIdService } from '../../services'
 import './styles.scss'
@@ -39,6 +40,12 @@ const Video = () => {
     removeFromWatchLater,
     isSavedForLater,
   } = useWatchLater()
+  const {
+    showPlaylistModal,
+    selectedVideo,
+    openPlaylistModal,
+    closePlaylistModal,
+  } = usePlaylistModal()
   const { isLoggedIn } = useUser()
   const { addToHistory, removeFromHistory, isWatched } = useHistory()
   const [isLoading, setIsLoading] = React.useState(true)
@@ -193,7 +200,10 @@ const Video = () => {
                       </div>
                     )}
 
-                    <div className="VerticalCard__icon">
+                    <div
+                      className="VerticalCard__icon"
+                      onClick={() => protectedFeat(openPlaylistModal, video)}
+                    >
                       <i className="fas fa-plus"></i>
                       <p>playlist</p>
                     </div>
@@ -234,6 +244,11 @@ const Video = () => {
         </aside>
       </main>
       <Footer />
+      <PlaylistModal
+        visible={showPlaylistModal}
+        onClose={closePlaylistModal}
+        selectedVideo={selectedVideo}
+      />
     </div>
   )
 }

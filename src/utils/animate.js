@@ -80,7 +80,7 @@ export const slider = {
     opacity: 1,
     transition: {
       duration: 1,
-      ease: 'easeOut',
+      ease: 'easeIn',
     },
   },
 }
@@ -89,4 +89,36 @@ export const slider = {
 export const sliderHolder = {
   hidden: { opacity: 1 },
   show: { opacity: 1, transition: { staggerChildren: 0.1, ease: 'easeOut' } },
+}
+
+export const zoom = {
+  hidden: {
+    scale: -1,
+    opacity: 0,
+  },
+
+  show: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.35,
+      ease: 'easeOut',
+    },
+  },
+  exit: {
+    scale: 0.5,
+    opacity: 0,
+  },
+}
+
+export const drop = {
+  hidden: { y: '-130%', opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1,
+      ease: 'easeIn',
+    },
+  },
 }

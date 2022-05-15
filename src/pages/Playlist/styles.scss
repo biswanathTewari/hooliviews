@@ -1,0 +1,119 @@
+@import '../../sass/index.scss';
+
+.playlist {
+  @include respond(phone) {
+    margin-bottom: 5rem;
+  }
+
+  &__container {
+    display: flex;
+
+    .playlist__content {
+      padding: $paddingV $paddingH;
+      padding-left: 6.5rem;
+      padding-bottom: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      overflow-x: hidden;
+
+      @include respond(phone) {
+        padding-left: $paddingH;
+      }
+
+      .playlist__info {
+        margin-right: 20%;
+        @include respond(phone) {
+          width: 100%;
+        }
+        .playlist__imgwrapper {
+          height: 10rem;
+          width: 20rem;
+          background-image: url('../../assets/images/playlist.jpg');
+          background-size: cover;
+          background-position: center;
+          border-radius: 0.5rem;
+        }
+
+        .h4 {
+          margin: 0.5rem 0;
+        }
+
+        .text-rg {
+          font-weight: bolder;
+          color: $inactiveColor;
+        }
+
+        .playlist__lists {
+          margin-top: 1rem;
+          @include respond(phone) {
+            width: 100%;
+            height: 40vh;
+            overflow: visible;
+            overflow-y: auto;
+          }
+
+          .playlist__card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: $lightGray;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.5s ease-in-out;
+
+            .playlist__icon {
+              transition: transform 0.5s ease-in-out;
+              &:hover {
+                transform: scale(1.5);
+              }
+            }
+          }
+
+          .playlist__card--selected {
+            background-color: whitesmoke;
+            color: $lightGray;
+          }
+
+          .playlist__empty {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5rem;
+          }
+        }
+      }
+
+      .playlist__list {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        overflow-y: auto;
+        row-gap: 1.25rem;
+        overflow: visible;
+        margin-bottom: 2rem;
+
+        .playlist__empty {
+          height: fit-content;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .my-5 {
+          margin: 5rem 0;
+          @include respond(phone) {
+            margin-top: -10rem;
+          }
+        }
+      }
+    }
+  }
+}

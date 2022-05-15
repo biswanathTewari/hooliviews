@@ -8,6 +8,7 @@ import {
   Likesprovider,
   WatchLaterprovider,
   Historyprovider,
+  PlaylistProvider,
 } from './'
 
 const GlobalContext = React.createContext()
@@ -59,7 +60,9 @@ const GlobalProvider = ({ children }) => {
         <VideosProvider>
           <Likesprovider>
             <WatchLaterprovider>
-              <Historyprovider>{children}</Historyprovider>
+              <Historyprovider>
+                <PlaylistProvider>{children}</PlaylistProvider>
+              </Historyprovider>
             </WatchLaterprovider>
           </Likesprovider>
         </VideosProvider>

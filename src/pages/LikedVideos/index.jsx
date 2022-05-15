@@ -8,9 +8,10 @@ import {
   Sidebar,
   MobileNav,
   HorizontalCard,
+  PlaylistModal,
 } from '../../components'
 import { useLikes } from '../../context'
-import { useDocumentTitle } from '../../hooks'
+import { useDocumentTitle, usePlaylistModal } from '../../hooks'
 import animation from '../../assets/lotties/empty.json'
 import { fadingParent, sliderHolder } from '../../utils'
 import './styles.scss'
@@ -24,6 +25,12 @@ const defaultOptions = {
 const LikedVideos = () => {
   const { myLikes, fetchLikes } = useLikes()
   const { isLoading, likes } = myLikes
+  const {
+    showPlaylistModal,
+    selectedVideo,
+    openPlaylistModal,
+    closePlaylistModal,
+  } = usePlaylistModal()
   useDocumentTitle('Liked Videos | Hooli Views')
 
   React.useEffect(() => {
@@ -69,7 +76,11 @@ const LikedVideos = () => {
               >
                 {likes.length > 0 ? (
                   likes.map(video => (
-                    <HorizontalCard video={video} key={video._id} />
+                    <HorizontalCard
+                      video={video}
+                      openPlaylistModal={openPlaylistModal}
+                      key={video._id}
+                    />
                   ))
                 ) : (
                   <div className="likedvideos__empty">
@@ -83,6 +94,11 @@ const LikedVideos = () => {
         </article>
       </main>
       <Footer />
+      <PlaylistModal
+        visible={showPlaylistModal}
+        onClose={closePlaylistModal}
+        selectedVideo={selectedVideo}
+      />
     </motion.div>
   )
 }

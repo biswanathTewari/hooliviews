@@ -6,8 +6,9 @@ import {
   MobileNav,
   VerticalCard,
   Footer,
+  PlaylistModal,
 } from '../../components'
-import { useDocumentTitle } from '../../hooks'
+import { useDocumentTitle, usePlaylistModal } from '../../hooks'
 import { useVideos, useUser } from '../../context'
 import './styles.scss'
 
@@ -15,6 +16,12 @@ const Explore = () => {
   const { isLoggedIn } = useUser()
   const { myVideos, fetchVideos } = useVideos()
   const { videos, isLoading } = myVideos
+  const {
+    showPlaylistModal,
+    selectedVideo,
+    openPlaylistModal,
+    closePlaylistModal,
+  } = usePlaylistModal()
   useDocumentTitle('Explore | Hooli Views')
 
   React.useEffect(() => {
@@ -45,6 +52,7 @@ const Explore = () => {
                   video={video}
                   key={video._id}
                   isLoggedIn={isLoggedIn}
+                  openPlaylistModal={openPlaylistModal}
                 />
               ))
             )}
@@ -52,6 +60,11 @@ const Explore = () => {
         </article>
       </main>
       <Footer />
+      <PlaylistModal
+        visible={showPlaylistModal}
+        onClose={closePlaylistModal}
+        selectedVideo={selectedVideo}
+      />
     </div>
   )
 }

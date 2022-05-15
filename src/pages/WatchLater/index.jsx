@@ -8,9 +8,10 @@ import {
   Sidebar,
   MobileNav,
   HorizontalCard,
+  PlaylistModal,
 } from '../../components'
 import { useWatchLater, useGlobalState } from '../../context'
-import { useDocumentTitle } from '../../hooks'
+import { useDocumentTitle, usePlaylistModal } from '../../hooks'
 import animation from '../../assets/lotties/empty.json'
 import { fadingParent, sliderHolder } from '../../utils'
 import './styles.scss'
@@ -25,6 +26,12 @@ const WatchLater = () => {
   const { showToast } = useGlobalState()
   const { myWatchLater, fetchWatchLater } = useWatchLater()
   const { isLoading, WatchLater: list } = myWatchLater
+  const {
+    showPlaylistModal,
+    selectedVideo,
+    openPlaylistModal,
+    closePlaylistModal,
+  } = usePlaylistModal()
   useDocumentTitle('Watch Later | Hooli Views')
 
   React.useEffect(() => {
@@ -69,7 +76,11 @@ const WatchLater = () => {
               >
                 {list.length > 0 ? (
                   list.map(video => (
-                    <HorizontalCard video={video} key={video._id} />
+                    <HorizontalCard
+                      video={video}
+                      openPlaylistModal={openPlaylistModal}
+                      key={video._id}
+                    />
                   ))
                 ) : (
                   <div className="watchlater__empty">
@@ -83,6 +94,11 @@ const WatchLater = () => {
         </article>
       </main>
       <Footer />
+      <PlaylistModal
+        visible={showPlaylistModal}
+        onClose={closePlaylistModal}
+        selectedVideo={selectedVideo}
+      />
     </motion.div>
   )
 }

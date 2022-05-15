@@ -12,6 +12,7 @@ import {
   History,
   Login,
   Signup,
+  Playlist,
 } from '../pages'
 
 const Navigation = () => {
@@ -48,6 +49,14 @@ const Navigation = () => {
         element={
           <AuthRoute>
             <History />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path="/playlist"
+        element={
+          <AuthRoute>
+            <Playlist />
           </AuthRoute>
         }
       />
