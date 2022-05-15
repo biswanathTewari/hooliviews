@@ -5,7 +5,7 @@ import propTypes from 'prop-types'
 import { useLikes, useWatchLater, useGlobalState } from '../../../context'
 import './styles.scss'
 
-const VerticalCard = ({ video, isLoggedIn }) => {
+const VerticalCard = ({ video, isLoggedIn, openPlaylistModal }) => {
   const navigate = useNavigate()
   const location = useLocation()
   const { showToast } = useGlobalState()
@@ -133,7 +133,10 @@ const VerticalCard = ({ video, isLoggedIn }) => {
                 <p>watch later</p>
               </div>
             )}
-            <div className="VerticalCard__icon">
+            <div
+              className="VerticalCard__icon"
+              onClick={() => protectedFeat(openPlaylistModal, video)}
+            >
               <i className="fas fa-plus"></i>
               <p>playlist</p>
             </div>
@@ -160,6 +163,7 @@ VerticalCard.propTypes = {
     _id: propTypes.string,
   }),
   isLoggedIn: propTypes.bool,
+  openPlaylistModal: propTypes.func,
 }
 
 export { VerticalCard }

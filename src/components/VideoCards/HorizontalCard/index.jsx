@@ -11,6 +11,7 @@ const HorizontalCard = ({
   video,
   deleteHistory = false,
   onDeleteHistory = () => {},
+  openPlaylistModal = () => {},
 }) => {
   const navigate = useNavigate()
   const { showToast } = useGlobalState()
@@ -132,7 +133,10 @@ const HorizontalCard = ({
                 <p>delete</p>
               </div>
             ) : (
-              <div className="HorizontalCard__icon">
+              <div
+                className="HorizontalCard__icon"
+                onClick={() => openPlaylistModal(video)}
+              >
                 <i className="fas fa-plus"></i>
                 <p>playlist</p>
               </div>
@@ -160,6 +164,7 @@ HorizontalCard.propTypes = {
   }),
   deleteHistory: propTypes.bool,
   onDeleteHistory: propTypes.func,
+  openPlaylistModal: propTypes.func,
 }
 
 export { HorizontalCard }
