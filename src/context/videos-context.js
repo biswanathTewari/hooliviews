@@ -1,5 +1,7 @@
 import React from 'react'
+import { useSearchParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
+
 import { actions } from './'
 import { getVideosService } from '../services'
 
@@ -31,6 +33,7 @@ const VideosReducer = (state, action) => {
 }
 
 const VideosProvider = ({ children }) => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [myVideos, dispatchVideos] = React.useReducer(VideosReducer, {
     videos: [],
     isLoading: false,
@@ -50,8 +53,25 @@ const VideosProvider = ({ children }) => {
     }
   }
 
+  const filterVideos = (videos, category) => {
+    if (category === 'All') {
+      return videos
+    }
+
+    return videos.filter(video => video.category.includes(category))
+  }
+
   return (
-    <VideosContext.Provider value={{ myVideos, dispatchVideos, fetchVideos }}>
+    <VideosContext.Provider
+      value={{
+        myVideos,
+        dispatchVideos,
+        fetchVideos,
+        searchParams,
+        setSearchParams,
+        filterVideos,
+      }}
+    >
       {children}
     </VideosContext.Provider>
   )

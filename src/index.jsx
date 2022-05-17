@@ -11,11 +11,11 @@ makeServer()
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalProvider>
-      <Router>
+    <Router>
+      <GlobalProvider>
         <App />
-      </Router>
-    </GlobalProvider>
+      </GlobalProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root'),
 )
