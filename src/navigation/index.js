@@ -16,8 +16,24 @@ import {
   NotFound,
   ComingSoon,
 } from '../pages'
+import { Storage } from '../utils'
+import { useUser, actions } from '../context'
 
 const Navigation = () => {
+  const { dispatchUser } = useUser()
+
+  // rehydrate user from local storage
+  const rehydrateUser = async () => {
+    const token = await Storage.get('authToken')
+    if (token) {
+      const userDetails = await Storage.get('userDetails')
+      dispatchUser({ type: actions.login, payload: userDetails })
+    }
+  }
+
+  React.useEffect(() => {
+    rehydrateUser()
+  }, [])
   return (
     <Routes>
       {/* public routes */}
