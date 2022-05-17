@@ -19,6 +19,7 @@ CategoryCard.propTypes = {
   img: PropTypes.any,
   type: PropTypes.string,
   onClick: PropTypes.func,
+  category: PropTypes.string,
 }
 
 export default CategoryCard

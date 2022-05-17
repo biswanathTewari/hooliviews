@@ -44,17 +44,17 @@ const Home = () => {
           <CategoryCard
             text="Life is either a daring adventure or nothing at all. "
             type="life"
-            onClick={() => navigate('/explore')}
+            onClick={() => navigate('/explore?category=Life')}
           />
           <CategoryCard
             text="tech is another name for hooli"
             type="tech"
-            onClick={() => navigate('/explore')}
+            onClick={() => navigate('/explore?category=Tech')}
           />
           <CategoryCard
             text="Noodles are everybody's happy food"
             type="noodles"
-            onClick={() => navigate('/explore')}
+            onClick={() => navigate('/explore?category=Food')}
           />
         </article>
       </main>
