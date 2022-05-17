@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-import { useUser } from '../../context'
+import { useUser, actions, useGlobalState } from '../../context'
+import { Storage } from '../../utils'
 import './styles.scss'
 
 const NavLink = ({ to, text, toggleNav, isOpen, isBtn, icon }) => {
@@ -36,7 +37,8 @@ const Navbar = ({ hasSearch }) => {
   const html = document.querySelector('html')
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { isLoggedIn } = useUser()
+  const { showToast } = useGlobalState()
+  const { isLoggedIn, dispatchUser } = useUser()
   const [isOpen, setIsOpen] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
   const [secondaryNav, setSecondaryNav] = React.useState(false)
@@ -52,6 +54,14 @@ const Navbar = ({ hasSearch }) => {
   const handleLogoClick = () => {
     navigate('/')
     toggleNav()
+  }
+
+  const logoutHandler = async () => {
+    dispatchUser({ type: actions.logout })
+    await Storage.store('authToken', null)
+    await Storage.store('userDetails', null)
+    showToast({ message: 'Logged out successfully', type: 'success' })
+    navigate('/')
   }
 
   const scrollhandler = React.useCallback(() => {
@@ -115,14 +125,9 @@ const Navbar = ({ hasSearch }) => {
         }`}
       >
         {isLoggedIn ? (
-          <NavLink
-            to={'/profile'}
-            text="profile"
-            toggleNav={toggleNav}
-            isOpen={isOpen}
-            isBtn={false}
-            icon="fa-user-alt"
-          />
+          <div className="nav-link" onClick={logoutHandler}>
+            <i className={`fas fa-sign-out-alt`}></i> Logout
+          </div>
         ) : (
           <NavLink
             to={'/login'}
