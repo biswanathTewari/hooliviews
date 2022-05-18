@@ -53,29 +53,30 @@ export const videos = [
     category: categories[1].categoryName,
     duration: '2:54',
   },
+  {
+    _id: 'eF17nqckQyo',
+    title: 'We Tried 15 Types Of Noodles | Ok Tested',
+    description: 'The best noodles in the world.',
+    img: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/12/Noodles-with-chilli-oil-eggs-6ec34e9.jpg',
+    creator: 'Ok Tested',
+    creatorImg:
+      'https://res.cloudinary.com/iambizan/image/upload/v1652805248/images/ok_m7tkbs.jpg',
+    category: categories[2].categoryName,
+    duration: '19:04',
+  },
+  {
+    _id: 'gZFBV3sAqa0',
+    title: 'We Tried The Viral Spicy Korean Fire Noodles | Ok Tested',
+    description:
+      "Shreya, Aniket, Vishal tried 6 levels of the spicy Samyang korean noodles. Why? So that you don't have to!",
+    img: 'https://i.ytimg.com/vi/gZFBV3sAqa0/maxresdefault.jpg',
+    creator: 'Ok Tested',
+    creatorImg:
+      'https://res.cloudinary.com/iambizan/image/upload/v1652805248/images/ok_m7tkbs.jpg',
+    category: categories[2].categoryName,
+    duration: '7:03',
+  },
 
-  {
-    _id: 'yxVPJoCMWgw',
-    title: 'Ramen at Hooli',
-    description: 'behind the scenes of Hooli Ramen.',
-    img: 'https://imgmedia.lbb.in/media/2021/11/619c62ce1134120ab583ce0d_1637638862209.jpg',
-    creator: 'Hooli Life',
-    creatorImg:
-      'https://res.cloudinary.com/iambizan/image/upload/v1651852163/images/hoolilogo_ctfwrv.png',
-    category: categories[2].categoryName,
-    duration: '12:44',
-  },
-  {
-    _id: 'f2kesmAO8VU',
-    title: 'Handmade Noodles',
-    description: 'The art of making noodles by hand.',
-    img: 'https://thewoksoflife.com/wp-content/uploads/2019/11/homemade-chinese-noodles-14.jpg',
-    creator: 'Bloomberg',
-    creatorImg:
-      'https://res.cloudinary.com/iambizan/image/upload/v1651852220/images/bloomberg_lhau5f.jpg',
-    category: categories[2].categoryName,
-    duration: '12:10',
-  },
   {
     _id: 'Q1uCYK6wnjk',
     title: 'Gilfoyle AI',
@@ -119,6 +120,41 @@ export const videos = [
       'https://res.cloudinary.com/iambizan/image/upload/v1651852163/images/hoolilogo_ctfwrv.png',
     category: categories[1].categoryName,
     duration: '2:54',
+  },
+  {
+    _id: 'yjrdJBP5i1I',
+    title: 'New crypto coin - Bloomberg',
+    description:
+      'Let’s see what the future holds for the crypto market. Bloomberg’s latest news.',
+    img: 'https://pbs.twimg.com/profile_images/993880919885918210/QrwJENEu_400x400.jpg',
+    creator: 'Bloomberg',
+    creatorImg:
+      'https://res.cloudinary.com/iambizan/image/upload/v1651852220/images/bloomberg_lhau5f.jpg',
+    category: categories[0].categoryName,
+    duration: '1:38',
+  },
+
+  {
+    _id: 'yxVPJoCMWgw',
+    title: 'Ramen at Hooli',
+    description: 'behind the scenes of Hooli Ramen.',
+    img: 'https://imgmedia.lbb.in/media/2021/11/619c62ce1134120ab583ce0d_1637638862209.jpg',
+    creator: 'Hooli Life',
+    creatorImg:
+      'https://res.cloudinary.com/iambizan/image/upload/v1651852163/images/hoolilogo_ctfwrv.png',
+    category: categories[2].categoryName,
+    duration: '12:44',
+  },
+  {
+    _id: 'f2kesmAO8VU',
+    title: 'Handmade Noodles',
+    description: 'The art of making noodles by hand.',
+    img: 'https://thewoksoflife.com/wp-content/uploads/2019/11/homemade-chinese-noodles-14.jpg',
+    creator: 'Bloomberg',
+    creatorImg:
+      'https://res.cloudinary.com/iambizan/image/upload/v1651852220/images/bloomberg_lhau5f.jpg',
+    category: categories[2].categoryName,
+    duration: '12:10',
   },
   // {
   //   _id: '',

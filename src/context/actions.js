@@ -32,4 +32,5 @@ export const actions = {
   getPlaylist: 'GET_PLAYLIST',
   addToPlaylist: 'ADD_TO_PLAYLIST',
   removeFromPlaylist: 'REMOVE_FROM_PLAYLIST',
+  setSearchTerm: 'SET_SEARCH_TERM',
 }

@@ -18,6 +18,35 @@
         padding-left: $paddingH;
       }
 
+      .explore__chips {
+        width: 100%;
+        display: flex;
+        margin-top: 0.5rem;
+
+        .explore__chip {
+          margin-right: 1rem;
+          margin-bottom: 0.5rem;
+          background-color: $lightGray;
+          border: 1px solid $inactiveColor;
+          border-radius: 1.5rem;
+          padding: 0.35rem 1rem;
+          font-size: 0.8rem;
+          color: white;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+
+          &:hover {
+            background-color: #e0e0e0;
+            color: black;
+          }
+        }
+
+        .explore__chip--active {
+          background-color: #fafafa;
+          color: black;
+        }
+      }
+
       .explore__videos {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));

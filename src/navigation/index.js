@@ -13,15 +13,37 @@ import {
   Login,
   Signup,
   Playlist,
+  NotFound,
+  ComingSoon,
 } from '../pages'
+import { Storage } from '../utils'
+import { useUser, actions } from '../context'
 
 const Navigation = () => {
+  const { dispatchUser } = useUser()
+
+  // rehydrate user from local storage
+  const rehydrateUser = async () => {
+    const token = await Storage.get('authToken')
+    if (token) {
+      const userDetails = await Storage.get('userDetails')
+      dispatchUser({ type: actions.login, payload: userDetails })
+    }
+  }
+
+  React.useEffect(() => {
+    rehydrateUser()
+  }, [])
   return (
     <Routes>
       {/* public routes */}
       <Route path="/" exact element={<Home />} />
       <Route path="/explore" element={<Explore />} />
       <Route path="/watch/:id" element={<Video />} />
+      <Route path="/live" element={<ComingSoon />} />
+      <Route path="/tutorials" element={<ComingSoon />} />
+      <Route path="/competition" element={<ComingSoon />} />
+      <Route path="/community" element={<ComingSoon />} />
 
       {/* auth routes */}
       <Route path="/login" element={<Login />} />
@@ -61,6 +83,8 @@ const Navigation = () => {
         }
       />
 
+      {/* 404 */}
+      <Route path="*" element={<NotFound />} />
       <Route path="mockapi" element={<Mockman />} />
     </Routes>
   )
