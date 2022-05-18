@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-import { useUser, actions, useGlobalState } from '../../context'
+import { useUser, actions, useGlobalState, useVideos } from '../../context'
 import { Storage } from '../../utils'
 import './styles.scss'
 
@@ -39,6 +39,10 @@ const Navbar = ({ hasSearch }) => {
   const { pathname } = useLocation()
   const { showToast } = useGlobalState()
   const { isLoggedIn, dispatchUser } = useUser()
+  const {
+    dispatchVideos,
+    myVideos: { searchTerm: isSearching },
+  } = useVideos()
   const [isOpen, setIsOpen] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
   const [secondaryNav, setSecondaryNav] = React.useState(false)
@@ -49,7 +53,20 @@ const Navbar = ({ hasSearch }) => {
     html.classList.toggle('body-overflow')
   }
 
-  const handleSearch = () => {}
+  const handleSearch = () => {
+    dispatchVideos({
+      type: actions.setSearchTerm,
+      payload: searchTerm,
+    })
+  }
+
+  const clearSearch = () => {
+    dispatchVideos({
+      type: actions.setSearchTerm,
+      payload: '',
+    })
+    setSearchTerm('')
+  }
 
   const handleLogoClick = () => {
     navigate('/')
@@ -113,10 +130,17 @@ const Navbar = ({ hasSearch }) => {
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
-          <i
-            className="fas fa-search navbar__searchicon"
-            onClick={handleSearch}
-          ></i>
+          {isSearching ? (
+            <i
+              className="fas fa-times navbar__searchicon"
+              onClick={clearSearch}
+            ></i>
+          ) : (
+            <i
+              className="fas fa-search navbar__searchicon"
+              onClick={handleSearch}
+            ></i>
+          )}
         </form>
       )}
       <ul

@@ -34,7 +34,7 @@ const Explore = () => {
   const { isLoggedIn } = useUser()
   const { myVideos, fetchVideos, searchParams, setSearchParams, filterVideos } =
     useVideos()
-  const { videos, isLoading } = myVideos
+  const { videos, isLoading, searchTerm } = myVideos
   const {
     showPlaylistModal,
     selectedVideo,
@@ -45,8 +45,8 @@ const Explore = () => {
   const category = searchParams.get('category') || 'All'
 
   const filteredVideos = React.useMemo(
-    () => filterVideos(videos, category),
-    [category, videos],
+    () => filterVideos(videos, category, searchTerm),
+    [category, searchTerm, videos],
   )
 
   React.useEffect(() => {
